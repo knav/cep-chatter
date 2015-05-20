@@ -42,7 +42,7 @@ public class SignupActivity extends ActionBarActivity {
                 user.setUsername(((EditText)findViewById(R.id.newidnameET)).getText().toString());
                 user.setPassword(((EditText)findViewById(R.id.newpasswordET)).getText().toString());
                 user.setEmail(((EditText) findViewById(R.id.newEmailET)).getText().toString());
-                JSONArray mFriendsList = new JSONArray();
+                ArrayList mFriendsList = new ArrayList();
                 user.put("friends", mFriendsList);
 
                 user.signUpInBackground(new SignUpCallback() {

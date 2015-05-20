@@ -23,6 +23,7 @@ import com.parse.ParseUser;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -54,6 +55,9 @@ public class FriendPickerDialogFrag extends DialogFragment{
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("frPicker", mNewFriendsList.toString());
                         // TODO Code an actual way of adding list to ParseUser.getCurrentUser()
+                        ParseUser.getCurrentUser().addAllUnique("friends", Arrays.asList(mNewFriendsList));
+                        ParseUser.getCurrentUser().saveInBackground();
+                        FriendListFragment.adapter.notifyDataSetChanged();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
