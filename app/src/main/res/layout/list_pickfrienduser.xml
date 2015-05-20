@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10sp">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/frcheckBox"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:id="@+id/frprofilepicIV"
+        android:src="@drawable/emptydp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/frcheckBox"
+        android:layout_toEndOf="@+id/frcheckBox" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/generic_dummy_str"
+        android:id="@+id/frusernameTV"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/frprofilepicIV"
+        android:layout_toEndOf="@+id/frprofilepicIV" />
+
+</RelativeLayout>

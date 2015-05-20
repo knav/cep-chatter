@@ -24,7 +24,7 @@ import com.parse.ParseUser;
 * Created by Benjamin on 19/5/15.
 */
 public class SendMsgDialogFrag extends DialogFragment {
-    private ParseUser mFriendSelected;
+    private String mFriendSelected;
     private String mMessageText;
 
     @Override
@@ -45,7 +45,7 @@ public class SendMsgDialogFrag extends DialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mMessageText = mMessageET.getText().toString();
-                mFriendSelected = parent.getItemAtPosition(position).getUsername();
+                //mFriendSelected = parent.getItemAtPosition(position);
             }
 
             @Override

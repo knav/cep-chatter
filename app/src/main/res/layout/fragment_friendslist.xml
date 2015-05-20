@@ -5,9 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:text="@string/generic_dummy_str"
+        android:padding="10sp"
+        android:id="@+id/friendAddBT"/>
+
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:choiceMode="multipleChoice"
         android:id="@+id/friendsLV" />
 
 </LinearLayout>

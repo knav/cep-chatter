@@ -1,11 +1,13 @@
 package com.swagger.navneeeth99.cepchatter;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,6 +47,15 @@ public class FriendListFragment extends Fragment {
         ParseQueryAdapter<ParseUser> adapter = new CustomUserAdapter(getActivity());
         ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
         listView.setAdapter(adapter);
+
+        Button mAddFriends = (Button)rootView.findViewById(R.id.friendAddBT);
+        mAddFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment mPickFriendsDialogFrag = new FriendPickerDialogFrag();
+                mPickFriendsDialogFrag.show(getActivity().getFragmentManager(), "addFrnd");
+            }
+        });
 
         return rootView;
     }
