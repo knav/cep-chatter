@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CEP Chat</string>
+    <string name="title_section1">List of Friends</string>
+    <string name="title_section2">Messages</string>
+    <string name="title_section3">Profile</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="namestr">Name</string>
+    <string name="passstr">Password</string>
+    <string name="emailstr">E-mail</string>
+    <string name="newbuttstr">New Button</string>
+    <string name="logstr">Login!</string>
+    <string name="signup_str">Sign Up!</string>
+    <string name="generic_dummy_str">Dummy dummy</string>
+    <string name="empty_str">Nothing here!</string>
+    <string name="yo_lostr">Send Yo to yourself</string>
+    <string name="newmsg_str">New Messages</string>
+    <string name="oldmsg_str">Old Messages</string>
+    <string name="input_msg">Please input your message!</string>
+
+</resources>
