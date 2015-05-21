@@ -55,7 +55,9 @@ public class FriendPickerDialogFrag extends DialogFragment{
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("frPicker", mNewFriendsList.toString());
                         // TODO Code an actual way of adding list to ParseUser.getCurrentUser()
-                        ParseUser.getCurrentUser().addAllUnique("friends", Arrays.asList(mNewFriendsList));
+                        for (ParseUser pNewFr:mNewFriendsList){
+                            ParseUser.getCurrentUser().add("friends", pNewFr);
+                        }
                         ParseUser.getCurrentUser().saveInBackground();
                         FriendListFragment.adapter.notifyDataSetChanged();
                     }
