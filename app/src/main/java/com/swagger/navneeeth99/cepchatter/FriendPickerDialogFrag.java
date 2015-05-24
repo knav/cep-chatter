@@ -76,7 +76,11 @@ public class FriendPickerDialogFrag extends DialogFragment{
         public CustomFriendPickerAdapter(Context context) {
             super(context, new ParseQueryAdapter.QueryFactory<ParseUser>() {
                 public ParseQuery create() {
-                    ParseQuery query = new ParseQuery(ParseUser.class);
+                    ParseQuery<ParseUser> query = ParseUser.getQuery();
+                    query.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
+                    for(ParseUser pUser : FriendListFragment.mFriendsList){
+                        query.whereNotEqualTo("username", pUser.getUsername());
+                    }
                     return query;
                 }
             });

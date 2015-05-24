@@ -10,21 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
 * Created by navneeeth99 on 17/5/15.
@@ -33,7 +28,6 @@ public class FriendListFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     public static CustomFriendsAdapter adapter;
-    //public static ArrayAdapter<ParseUser> adapter;
     public static ArrayList<ParseUser> mFriendsList = new ArrayList<>();
 
     /**
@@ -56,7 +50,7 @@ public class FriendListFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_friendslist, container, false);
         final ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
 
-        ParseQuery query = ParseUser.getQuery();
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
         query.include("friends");
         query.findInBackground(new FindCallback<ParseUser>() {
