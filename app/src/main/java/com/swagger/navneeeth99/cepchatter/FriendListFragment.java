@@ -33,6 +33,8 @@ public class FriendListFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
     public static CustomFriendsAdapter adapter;
+    //public static ArrayAdapter<ParseUser> adapter;
+    public static ArrayList<ParseUser> mFriendsList = new ArrayList<>();
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -52,14 +54,24 @@ public class FriendListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_friendslist, container, false);
+        final ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
 
-        adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser);
-        ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
-        listView.setAdapter(adapter);
-
-        //adapter = new CustomUserAdapter(getActivity());
-        //ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
-        //listView.setAdapter(adapter);
+        ParseQuery query = ParseUser.getQuery();
+        query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+        query.include("friends");
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> list, ParseException e) {
+                Log.d("test", list.toString());
+                List<ParseUser> mTempList = list.get(0).getList("friends");
+                for (ParseUser pUser:mTempList){
+                    mFriendsList.add(pUser);
+                }
+                Log.d("test", mFriendsList.toString());
+                adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
+                listView.setAdapter(adapter);
+            }
+        });
 
         Button mAddFriends = (Button)rootView.findViewById(R.id.friendAddBT);
         mAddFriends.setOnClickListener(new View.OnClickListener() {
@@ -75,23 +87,11 @@ public class FriendListFragment extends Fragment {
 
     public class CustomFriendsAdapter extends ArrayAdapter<ParseUser>{
         private int mResource;
-        private List<ParseUser> mListFriends;
+        private ArrayList<ParseUser> mListFriends;
 
-        public CustomFriendsAdapter(Context context, int resource) {
-            super(context, resource);
-
-            ParseQuery query = ParseUser.getQuery();
-            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
-            query.include("friends");
-            query.findInBackground(new FindCallback<ParseUser>() {
-                @Override
-                public void done(List<ParseUser> list, ParseException e) {
-                    Log.d("test", "At first done of query");
-                    mListFriends = list.get(0).getList("friends");
-                    Log.d("test", mListFriends.toString());
-                }
-            });
-
+        public CustomFriendsAdapter(Context context, int resource, ArrayList<ParseUser> friends) {
+            super(context, resource, friends);
+            mListFriends = friends;
             mResource = resource;
         }
 
@@ -103,46 +103,9 @@ public class FriendListFragment extends Fragment {
 
             // Add the title view
             TextView titleTextView = (TextView)row.findViewById(R.id.usernameTV);
-            titleTextView.setText("bah test");
-            // titleTextView.setText(mListFriends.get(position).getString("username"));
+            titleTextView.setText(mListFriends.get(position).getUsername());
             return row;
 
         }
     }
-
-    /*public class CustomUserAdapter extends ParseQueryAdapter<ParseUser> {
-
-        public CustomUserAdapter(Context context) {
-            super(context, new ParseQueryAdapter.QueryFactory<ParseUser>() {
-                public ParseQuery<ParseUser> create() {
-                    ParseQuery<ParseUser> query = ParseUser.getQuery();
-                    query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
-                    query.include("friends");
-                    return query;
-                }
-            });
-        }
-
-        // Customize the layout by overriding getItemView
-        @Override
-        public View getItemView(ParseUser object, View v, ViewGroup parent) {
-            if (v == null) {
-                v = View.inflate(getContext(), R.layout.fragment_friendslist, null);
-            }
-
-            super.getItemView(object, v, parent);
-
-            List<ParseUser> mTempList = object.getList("friends");
-
-            //for (ParseUser pFriend:mTempList) {
-            //    mCurrentFriendList.add(pFriend);
-            //}
-
-            CustomFriendsAdapter mFriendAdapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mTempList);
-            ListView listView = (ListView)v.findViewById(R.id.friendsLV);
-            listView.setAdapter(mFriendAdapter);
-            return v;
-        }
-
-    }*/
 }
