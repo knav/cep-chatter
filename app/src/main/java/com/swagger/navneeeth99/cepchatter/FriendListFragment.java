@@ -57,6 +57,7 @@ public class FriendListFragment extends Fragment {
             @Override
             public void done(List<ParseUser> list, ParseException e) {
                 Log.d("test", list.toString());
+                mFriendsList.clear();
                 List<ParseUser> mTempList = list.get(0).getList("friends");
                 for (ParseUser pUser:mTempList){
                     mFriendsList.add(pUser);
