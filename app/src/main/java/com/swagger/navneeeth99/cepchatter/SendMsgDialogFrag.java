@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 * Created by Benjamin on 19/5/15.
@@ -38,7 +42,13 @@ public class SendMsgDialogFrag extends DialogFragment {
         final EditText mMessageET = (EditText)mLL.findViewById(R.id.newMsgET);
         final Spinner mFriendSpinner = (Spinner)mLL.findViewById(R.id.friendSpinner);
 
-        ParseQueryAdapter<ParseUser> adapter = new CustomUserAdapter(this.getActivity());
+        //ParseQueryAdapter<ParseUser> adapter = new CustomUserAdapter(this.getActivity());
+        List<ParseUser> mCurrFriendsList = ParseUser.getCurrentUser().getList("friends");
+        ArrayList<ParseUser> mCurrFriendsArray = new ArrayList<>();
+        for (ParseUser pUser : mCurrFriendsList){
+            mCurrFriendsArray.add(pUser);
+        }
+        CustomFriendsDropdownAdapter adapter = new CustomFriendsDropdownAdapter(getActivity(), R.layout.list_customuser, mCurrFriendsArray);
         mFriendSpinner.setAdapter(adapter);
 
         mFriendSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -60,7 +70,6 @@ public class SendMsgDialogFrag extends DialogFragment {
                 .setView(mLL)
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //TODO: Code for sending the message
                         PMessage newMsg = new PMessage();
                         newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
                         Log.d("Message", ParseUser.getCurrentUser().getUsername());
@@ -106,6 +115,30 @@ public class SendMsgDialogFrag extends DialogFragment {
             return v;
         }
 
+    }
+
+    public class CustomFriendsDropdownAdapter extends ArrayAdapter<ParseUser> {
+        private int mResource;
+        private ArrayList<ParseUser> mListFriends;
+
+        public CustomFriendsDropdownAdapter(Context context, int resource, ArrayList<ParseUser> friends) {
+            super(context, resource, friends);
+            mListFriends = friends;
+            mResource = resource;
+        }
+
+        @Override
+        public View getView(int position, View row, ViewGroup parent) {
+            if (row == null) {
+                row = getActivity().getLayoutInflater().inflate(mResource, parent, false);
+            }
+
+            // Add the title view
+            TextView titleTextView = (TextView)row.findViewById(R.id.usernameTV);
+            titleTextView.setText(mListFriends.get(position).getUsername());
+            return row;
+
+        }
     }
 
 }

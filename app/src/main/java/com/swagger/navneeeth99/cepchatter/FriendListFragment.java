@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -50,23 +51,24 @@ public class FriendListFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_friendslist, container, false);
         final ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
 
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
-        query.include("friends");
-        query.findInBackground(new FindCallback<ParseUser>() {
-            @Override
-            public void done(List<ParseUser> list, ParseException e) {
-                Log.d("test", list.toString());
-                mFriendsList.clear();
-                List<ParseUser> mTempList = list.get(0).getList("friends");
-                for (ParseUser pUser:mTempList){
-                    mFriendsList.add(pUser);
+        if (ParseUser.getCurrentUser() != null) {
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+            query.include("friends");
+            query.getFirstInBackground(new GetCallback<ParseUser>() {
+                @Override
+                public void done(ParseUser parseUser, ParseException e) {
+                    mFriendsList.clear();
+                    List<ParseUser> mTempList = parseUser.getList("friends");
+                    for (ParseUser pUser : mTempList) {
+                        mFriendsList.add(pUser);
+                    }
+                    Log.d("test", mFriendsList.toString());
+                    adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
+                    listView.setAdapter(adapter);
                 }
-                Log.d("test", mFriendsList.toString());
-                adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
-                listView.setAdapter(adapter);
-            }
-        });
+            });
+        }
 
         Button mAddFriends = (Button)rootView.findViewById(R.id.friendAddBT);
         mAddFriends.setOnClickListener(new View.OnClickListener() {

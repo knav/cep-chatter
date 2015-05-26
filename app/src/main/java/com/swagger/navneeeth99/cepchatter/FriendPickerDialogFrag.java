@@ -54,7 +54,6 @@ public class FriendPickerDialogFrag extends DialogFragment{
                 .setPositiveButton("Add Friends", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("frPicker", mNewFriendsList.toString());
-                        // TODO Code an actual way of adding list to ParseUser.getCurrentUser()
                         for (ParseUser pNewFr:mNewFriendsList){
                             ParseUser.getCurrentUser().add("friends", pNewFr);
                         }
@@ -76,11 +75,14 @@ public class FriendPickerDialogFrag extends DialogFragment{
         public CustomFriendPickerAdapter(Context context) {
             super(context, new ParseQueryAdapter.QueryFactory<ParseUser>() {
                 public ParseQuery create() {
+                    ArrayList<String> mExcludeFromList = new ArrayList<>();
                     ParseQuery<ParseUser> query = ParseUser.getQuery();
-                    query.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
+                    mExcludeFromList.add(ParseUser.getCurrentUser().getUsername());
                     for(ParseUser pUser : FriendListFragment.mFriendsList){
-                        query.whereNotEqualTo("username", pUser.getUsername());
+                        mExcludeFromList.add(pUser.getUsername());
                     }
+                    Log.d("test", mExcludeFromList.toString());
+                    query.whereNotContainedIn("username", mExcludeFromList);
                     return query;
                 }
             });

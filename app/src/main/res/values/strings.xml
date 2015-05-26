@@ -21,5 +21,6 @@
     <string name="newmsg_str">New Messages</string>
     <string name="oldmsg_str">Old Messages</string>
     <string name="input_msg">Please input your message!</string>
+    <string name="nonewfriends_str">Everyone is already your friend!</string>
 
 </resources>
