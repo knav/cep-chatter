@@ -29,7 +29,7 @@ import java.util.List;
 * Created by Benjamin on 19/5/15.
 */
 public class SendMsgDialogFrag extends DialogFragment {
-    private String mFriendSelected;
+    private ParseUser mFriendSelected;
     private String mMessageText;
 
     @Override
@@ -45,7 +45,7 @@ public class SendMsgDialogFrag extends DialogFragment {
 
         //ParseQueryAdapter<ParseUser> adapter = new CustomUserAdapter(this.getActivity());
         List<ParseUser> mCurrFriendsList = ParseUser.getCurrentUser().getList("friends");
-        ArrayList<ParseUser> mCurrFriendsArray = new ArrayList<>();
+        final ArrayList<ParseUser> mCurrFriendsArray = new ArrayList<>();
         for (ParseUser pUser : mCurrFriendsList){
             mCurrFriendsArray.add(pUser);
         }
@@ -56,8 +56,7 @@ public class SendMsgDialogFrag extends DialogFragment {
         mFriendSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mMessageText = mMessageET.getText().toString();
-                //mFriendSelected = parent.getItemAtPosition(position);
+                mFriendSelected = mCurrFriendsArray.get(position);
             }
 
             @Override
@@ -72,14 +71,15 @@ public class SendMsgDialogFrag extends DialogFragment {
                 .setView(mLL)
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        mMessageText = mMessageET.getText().toString();
                         PMessage newMsg = new PMessage();
                         newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
-                        Log.d("Message", ParseUser.getCurrentUser().getUsername());
-                        newMsg.setmReceiver(mFriendSelected);
-                        Log.d("Message", mFriendSelected);
+                        newMsg.setmReceiver(mFriendSelected.getUsername());
                         newMsg.setmTitle("Blank for now");
                         newMsg.setmContent(mMessageText);
-                        Log.d("Message", mMessageText + " and i had typed: " + mMessageET.getText().toString());
+                        newMsg.saveInBackground();
+                        MessagesFragment.mMessagesAdapter.notifyDataSetChanged();
+                        MessagesFragment.mMessagesAdapter.loadObjects();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -90,58 +90,6 @@ public class SendMsgDialogFrag extends DialogFragment {
         // Create the AlertDialog object and return it
         return builder.create();
     }
-
-    public static class CustomUserAdapter extends ParseQueryAdapter<ParseUser> {
-
-        public CustomUserAdapter(Context context) {
-            super(context, new ParseQueryAdapter.QueryFactory<ParseUser>() {
-                public ParseQuery create() {
-                    ParseQuery query = new ParseQuery(ParseUser.class);
-                    return query;
-                }
-            });
-        }
-
-        // Customize the layout by overriding getItemView
-        @Override
-        public View getItemView(ParseUser object, View v, ViewGroup parent) {
-            if (v == null) {
-                v = View.inflate(getContext(), R.layout.list_customuser, null);
-            }
-
-            super.getItemView(object, v, parent);
-
-            // Add the title view
-            TextView titleTextView = (TextView) v.findViewById(R.id.usernameTV);
-            titleTextView.setText(object.getString("username"));
-            return v;
-        }
-
-    }
-
-    /*public class CustomFriendsDropdownAdapter extends ArrayAdapter<ParseUser> {
-        private int mResource;
-        private ArrayList<ParseUser> mListFriends;
-
-        public CustomFriendsDropdownAdapter(Context context, int resource, ArrayList<ParseUser> friends) {
-            super(context, resource, friends);
-            mListFriends = friends;
-            mResource = resource;
-        }
-
-        @Override
-        public View getView(int position, View row, ViewGroup parent) {
-            if (row == null) {
-                row = getActivity().getLayoutInflater().inflate(mResource, parent, false);
-            }
-
-            // Add the title view
-            TextView titleTextView = (TextView)row.findViewById(R.id.usernameTV);
-            titleTextView.setText(mListFriends.get(position).getUsername());
-            return row;
-
-        }
-    }*/
 
     public class CustomFriendsDropdownAdapter extends ArrayAdapter<String>{
 

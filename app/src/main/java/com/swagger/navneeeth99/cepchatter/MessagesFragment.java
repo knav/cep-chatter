@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class MessagesFragment extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    public static ParseQueryAdapter<PMessage> mMessagesAdapter = null;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -57,24 +59,22 @@ public class MessagesFragment extends Fragment {
 //        };
 
         //final ParseQueryAdapter<Message> adapter = new ParseQueryAdapter<>(getActivity(), Message.class);
-        final ParseQueryAdapter<PMessage> adapter = new CustomMessageAdapter(getActivity());
         ListView mInboxListView = (ListView)rootView.findViewById(R.id.incomingLV);
-        mInboxListView.setAdapter(adapter);
+        mMessagesAdapter = new CustomMessageAdapter(getActivity());
+        mInboxListView.setAdapter(mMessagesAdapter);
 
         Button mMessageSender = (Button)rootView.findViewById(R.id.sendMessageBT);
         mMessageSender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                PMessage newYo = new PMessage();
-//                newYo.setmSender(ParseUser.getCurrentUser().getUsername());
-//                newYo.setmReceiver(ParseUser.getCurrentUser().getUsername());
-//                newYo.setmTitle("YO!");
-//                newYo.setmContent("What a lonely life you lead! Do you want to find a way to escape the loneliness that tears at your heart? Well, there is actually no way to do that - so good day sir!");
-//                newYo.saveInBackground();
-//                adapter.notifyDataSetChanged();
-//                adapter.loadObjects();
-                DialogFragment mSendMsgDialogFrag = new SendMsgDialogFrag();
-                mSendMsgDialogFrag.show(getActivity().getFragmentManager(), "sendMsg");
+                int mListSize = ParseUser.getCurrentUser().getList("friends").size();
+                Log.d("test", "number of friends: " + mListSize);
+                if (mListSize == 0){
+                    //Some kind of warning dialog maybe?
+                } else {
+                    DialogFragment mSendMsgDialogFrag = new SendMsgDialogFrag();
+                    mSendMsgDialogFrag.show(getActivity().getFragmentManager(), "sendMsg");
+                }
             }
         });
 
