@@ -21,6 +21,14 @@ public class PMessage extends ParseObject{
         put("from", mSender);
     }
 
+    public boolean getmRead(){
+        return getBoolean("read");
+    }
+
+    public void setmRead(boolean mRead){
+        put("read", mRead);
+    }
+
     public String getmReceiver() {
         return getString("to");
     }

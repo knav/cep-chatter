@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,7 +49,8 @@ public class SendMsgDialogFrag extends DialogFragment {
         for (ParseUser pUser : mCurrFriendsList){
             mCurrFriendsArray.add(pUser);
         }
-        CustomFriendsDropdownAdapter adapter = new CustomFriendsDropdownAdapter(getActivity(), R.layout.list_customuser, mCurrFriendsArray);
+        CustomFriendsDropdownAdapter adapter = new CustomFriendsDropdownAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, mCurrFriendsArray);
+        //ArrayAdapter<ParseUser> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_customuser, R.id.usernameTV, mCurrFriendsArray);
         mFriendSpinner.setAdapter(adapter);
 
         mFriendSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -117,7 +119,7 @@ public class SendMsgDialogFrag extends DialogFragment {
 
     }
 
-    public class CustomFriendsDropdownAdapter extends ArrayAdapter<ParseUser> {
+    /*public class CustomFriendsDropdownAdapter extends ArrayAdapter<ParseUser> {
         private int mResource;
         private ArrayList<ParseUser> mListFriends;
 
@@ -138,6 +140,41 @@ public class SendMsgDialogFrag extends DialogFragment {
             titleTextView.setText(mListFriends.get(position).getUsername());
             return row;
 
+        }
+    }*/
+
+    public class CustomFriendsDropdownAdapter extends ArrayAdapter<String>{
+
+        private ArrayList<ParseUser> mFriends;
+        LayoutInflater inflater;
+
+        public CustomFriendsDropdownAdapter(Context context, int textViewResourceId, ArrayList objects) {
+            super(context, textViewResourceId, objects);
+            mFriends = objects;
+            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        // This funtion called for each row ( Called data.size() times )
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+            View row = inflater.inflate(R.layout.list_customuser, parent, false);
+
+            ParseUser mFriendPicked = mFriends.get(position);
+
+            TextView usernameTV = (TextView)row.findViewById(R.id.usernameTV);
+            ImageView userprofile = (ImageView)row.findViewById(R.id.profilepicIV);
+            usernameTV.setText(mFriendPicked.getUsername());
+
+            return row;
         }
     }
 
