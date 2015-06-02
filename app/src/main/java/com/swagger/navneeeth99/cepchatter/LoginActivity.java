@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -28,7 +29,12 @@ public class LoginActivity extends ActionBarActivity {
         setContentView(R.layout.activity_login);
 
         Button mLoginButton = (Button)findViewById(R.id.loginBT);
-        //ParseUser.logOut();
+        ParseUser mCurrentUser = ParseUser.getCurrentUser() ;
+        if (mCurrentUser != null){
+            ParseUser.logOut();
+            Toast.makeText(LoginActivity.this, "Eh it worked lmaoo (login)", Toast.LENGTH_LONG).show();
+        }
+
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
