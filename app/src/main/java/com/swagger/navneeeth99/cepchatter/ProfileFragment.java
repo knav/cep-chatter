@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -21,6 +25,7 @@ public class ProfileFragment extends Fragment {
     public static final int GET_FROM_GALLERY = 555;
     private static final String ARG_SECTION_NUMBER = "section_number";
     public View rootView = null;
+    public byte[] image = null;
 
     public static ProfileFragment newInstance(int sectionNumber) {
         ProfileFragment fragment = new ProfileFragment();
@@ -67,6 +72,16 @@ public class ProfileFragment extends Fragment {
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                image = stream.toByteArray();
+                ParseFile file;
+                file = new ParseFile("profile_picture.jpeg", image);
+
+                file.saveInBackground();
+                ParseUser.getCurrentUser().put("photo", file);
+                ParseUser.getCurrentUser().saveInBackground();
+
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -75,12 +90,11 @@ public class ProfileFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            ((ImageView)rootView.findViewById(R.id.profPic)).setImageBitmap(bitmap);
+
+
+
         }
     }
-
-
-
 
 
 }
