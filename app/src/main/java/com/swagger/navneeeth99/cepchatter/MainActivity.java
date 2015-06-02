@@ -149,6 +149,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 return FriendListFragment.newInstance(position);
             } else if (position == 1) {
                 return MessagesFragment.newInstance(position);
+            } else if (position == 2) {
+                return ProfileFragment.newInstance(position);
             } else {
                 return PlaceholderFragment.newInstance(position);
             }
