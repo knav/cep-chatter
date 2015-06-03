@@ -38,27 +38,38 @@ public class SignupActivity extends ActionBarActivity {
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseUser user = new ParseUser();
-                user.setUsername(((EditText)findViewById(R.id.newidnameET)).getText().toString());
-                user.setPassword(((EditText)findViewById(R.id.newpasswordET)).getText().toString());
-                user.setEmail(((EditText) findViewById(R.id.newEmailET)).getText().toString());
-                ArrayList mFriendsList = new ArrayList();
-                user.put("friends", mFriendsList);
+                if (((EditText)findViewById(R.id.newidnameET)).getText().toString() == null){
+                    ((EditText)findViewById(R.id.newidnameET)).setError("Name field cannot be empty!");
+                } else if (((EditText) findViewById(R.id.newpasswordET)).getText().toString() == null){
+                    ((EditText) findViewById(R.id.newpasswordET)).setError("Password field cannot be empty!");
+                } else if (((EditText) findViewById(R.id.newEmailET)).getText().toString() == null){
+                    ((EditText) findViewById(R.id.newEmailET)).setError("Email field cannot be empty!");
+                } else if (!((EditText) findViewById(R.id.newpasswordET)).getText().toString().equals(((EditText) findViewById(R.id.confirmpasswordET)).getText().toString())){
+                    ((EditText) findViewById(R.id.confirmpasswordET)).setError("Passwords do not match!");
+                } else {
+                    ParseUser user = new ParseUser();
+                    user.setUsername(((EditText) findViewById(R.id.newidnameET)).getText().toString());
+                    user.setPassword(((EditText) findViewById(R.id.newpasswordET)).getText().toString());
+                    user.setEmail(((EditText) findViewById(R.id.newEmailET)).getText().toString());
+                    ArrayList mFriendsList = new ArrayList();
+                    user.put("friends", mFriendsList);
 
-                user.signUpInBackground(new SignUpCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            // Hooray! Let them use the app now.
-                            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                        } else {
-                            // Sign up didn't succeed. Look at the ParseException
-                            // to figure out what went wrong
-                            Toast.makeText(SignupActivity.this, "Eh it failed lmaoo (signup)", Toast.LENGTH_LONG).show();
-                            Log.d("Signup", e.toString());
+                    user.signUpInBackground(new SignUpCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                // Hooray! Let them use the app now.
+                                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                                Toast.makeText(SignupActivity.this, "Successfully signed up!", Toast.LENGTH_LONG).show();
+                                startActivity(intent);
+                            } else {
+                                // Sign up didn't succeed. Look at the ParseException
+                                // to figure out what went wrong
+                                Toast.makeText(SignupActivity.this, "Error: "+ e.toString(), Toast.LENGTH_LONG).show();
+
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }

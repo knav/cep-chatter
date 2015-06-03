@@ -31,7 +31,6 @@ public class LoginActivity extends ActionBarActivity {
         Button mLoginButton = (Button)findViewById(R.id.loginBT);
         ParseUser mCurrentUser = ParseUser.getCurrentUser() ;
         if (mCurrentUser != null){
-            Toast.makeText(LoginActivity.this, "Eh it worked lmaoo (logout)", Toast.LENGTH_LONG).show();
             ParseUser.logOut();
         }
 

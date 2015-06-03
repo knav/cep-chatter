@@ -6,42 +6,42 @@
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6957366a186e0133607edf0f3320a8d70c12fc11.jar" />
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6957366a186e0133607edf0f3320a8d70c12fc11.jar" />
     </item>
     <item
-        jar="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/pre-dexed/debug/classes-e72ca2b7d6293a11882ad29e26b1d9fcc6cc41b8.jar" />
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-946a009de0820a15c823e53f7e7676e36493f39a.jar" />
     </item>
     <item
-        jar="/Users/Benjamin/Documents/CEP Chatter App/app/libs/Parse-1.9.2.jar"
+        jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/classes-e2bfc14e958ada7cf3ff11b37879ba23687e5a3a.jar" />
+    </item>
+    <item
+        jar="/Users/Benjamin/Documents/CEP-Chatter/app/libs/Parse-1.9.2.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="fe739334780fe321141e62720822c2d456061899">
-        <dex dex="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/pre-dexed/debug/Parse-1.9.2-5cc9bfaf4c103734247a09e8f8a5e428ef21cc54.jar" />
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/Parse-1.9.2-d54231c570bcbd858aeddea4b50ebfcc0bbed545.jar" />
     </item>
     <item
         jar="/Users/Benjamin/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-bbe7d7c742f7cca9513d737bd941957bfefd9238.jar" />
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-bbe7d7c742f7cca9513d737bd941957bfefd9238.jar" />
     </item>
     <item
-        jar="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/pre-dexed/debug/classes-b2bfef25649b4857fd07877e31036bfa5bbc2892.jar" />
-    </item>
-    <item
-        jar="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/Benjamin/Documents/CEP Chatter App/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-b1c95fda56aa500d2db78d94ddb3e04fd5002e94.jar" />
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/classes-734d0cbbc31cbb09ff0cbbd97978ef7f5373c25e.jar" />
     </item>
 
 </items>

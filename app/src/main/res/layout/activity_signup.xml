@@ -50,6 +50,17 @@
         android:layout_alignLeft="@+id/newEmailET"
         android:layout_alignStart="@+id/newEmailET" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/confirmpasswordET"
+        android:hint="@string/confirmpassstr"
+        android:layout_below="@+id/newpasswordET"
+        android:layout_alignLeft="@+id/newpasswordET"
+        android:layout_alignStart="@+id/newpasswordET" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

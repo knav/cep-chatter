@@ -11,6 +11,7 @@
     <string name="title_activity_signup">SignupActivity</string>
     <string name="namestr">Name</string>
     <string name="passstr">Password</string>
+    <string name="confirmpassstr">Confirm Password</string>
     <string name="emailstr">E-mail</string>
     <string name="newbuttstr">New Button</string>
     <string name="logstr">Login!</string>
