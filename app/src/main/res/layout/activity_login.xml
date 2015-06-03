@@ -52,4 +52,12 @@
         android:layout_below="@+id/loginBT"
         android:layout_centerHorizontal="true"
         android:text="@string/signup_str" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reset_pass_str"
+        android:id="@+id/resetPasswordButton"
+        android:layout_below="@+id/passwordET"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

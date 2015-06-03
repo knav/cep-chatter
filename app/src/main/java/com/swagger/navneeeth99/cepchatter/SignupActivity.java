@@ -1,8 +1,11 @@
 package com.swagger.navneeeth99.cepchatter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -21,6 +25,8 @@ import com.parse.SignUpCallback;
 import org.json.JSONArray;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,11 +34,23 @@ import java.util.List;
 
 
 public class SignupActivity extends ActionBarActivity {
+    public static final int GET_FROM_GALLERY = 555;
+    public byte[] image = null;
+    public ParseFile file;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        ImageButton mAddProfPicButton = (ImageButton)findViewById(R.id.addProfPicButton);
+        mAddProfPicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            }
+        });
 
         Button mSignUpButton = (Button)findViewById(R.id.signupBT);
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +71,7 @@ public class SignupActivity extends ActionBarActivity {
                     user.setEmail(((EditText) findViewById(R.id.newEmailET)).getText().toString());
                     ArrayList mFriendsList = new ArrayList();
                     user.put("friends", mFriendsList);
+                    user.put("photo",file);
 
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
@@ -95,5 +114,38 @@ public class SignupActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        //Detects request codes
+        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                image = stream.toByteArray();
+                file = new ParseFile("profile_picture.jpeg", image);
+                file.saveInBackground();
+//                ParseUser.getCurrentUser().put("photo", file);
+//                ParseUser.getCurrentUser().saveInBackground();
+                ((ImageButton)findViewById(R.id.addProfPicButton)).setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
+
+
+        }
     }
 }

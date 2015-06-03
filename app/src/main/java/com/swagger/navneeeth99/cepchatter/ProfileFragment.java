@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.parse.ParseFile;
@@ -81,7 +82,7 @@ public class ProfileFragment extends Fragment {
                 file.saveInBackground();
                 ParseUser.getCurrentUser().put("photo", file);
                 ParseUser.getCurrentUser().saveInBackground();
-
+                ((ImageView)rootView.findViewById(R.id.profPic)).setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

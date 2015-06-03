@@ -66,6 +66,15 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
+        Button mResetPasswordButton = (Button)findViewById(R.id.resetPasswordButton);
+
+        mResetPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment mResetPasswordDialogFrag = new ResetPasswordDialogFragment();
+                mResetPasswordDialogFrag.show(getFragmentManager(), "Reset Password");
+            }
+        });
 
     }
 

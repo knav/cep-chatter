@@ -69,4 +69,13 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <ImageButton
+        android:contentDescription="@string/string_content_description"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/addProfPicButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"/>
+
 </RelativeLayout>

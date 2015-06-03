@@ -24,5 +24,9 @@
     <string name="input_msg">Please input your message!</string>
     <string name="nonewfriends_str">Everyone is already your friend!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_content_description">Profile Picture</string>
+    <string name="reset_pass_str">Reset Password</string>
+    <string name="example_email_str">ayylmao@gmail.com</string>
+    <string name="enter_email_str">Enter your email address!</string>
 
 </resources>
