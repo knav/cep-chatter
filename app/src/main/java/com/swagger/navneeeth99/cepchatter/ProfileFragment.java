@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
@@ -71,6 +72,8 @@ public class ProfileFragment extends Fragment {
                         ((ImageButton) rootView.findViewById(R.id.changeProfPicButton)).setImageBitmap(bmp);
                     }
                 });
+
+                ((TextView)rootView.findViewById(R.id.profileUsernameTV)).setText(parseUser.getUsername());
             }
         });
 

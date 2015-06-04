@@ -3,8 +3,6 @@
     android:layout_height="match_parent"
     tools:context="com.swagger.navneeeth99.cepchatter.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
 
     <ImageButton
         android:contentDescription="@string/string_content_description"
@@ -15,5 +13,19 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:scaleType="fitCenter" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="@string/namestr"
+        android:id="@+id/profileUsernameTV"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/changeProfPicButton"
+        android:layout_toEndOf="@+id/changeProfPicButton"
+        android:layout_alignBottom="@+id/changeProfPicButton"
+        android:gravity="center"/>
 
 </RelativeLayout>
