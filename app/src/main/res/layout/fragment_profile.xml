@@ -1,21 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.swagger.navneeeth99.cepchatter.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload Image"
-        android:id="@+id/uploadProfPicButton"
-        android:layout_gravity="center_horizontal|top" />
 
-    <ImageView
+    <ImageButton
         android:contentDescription="@string/string_content_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/profPic"
-        android:layout_gravity="center" />
-</FrameLayout>
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/changeProfPicButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:scaleType="fitCenter" />
+
+</RelativeLayout>

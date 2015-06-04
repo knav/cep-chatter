@@ -3,6 +3,7 @@ package com.swagger.navneeeth99.cepchatter;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -13,8 +14,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.GetDataCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.io.ByteArrayOutputStream;
@@ -50,8 +57,24 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Button mUploadProfPicButton = (Button)rootView.findViewById(R.id.uploadProfPicButton);
-        mUploadProfPicButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton mChangeProfPicButton = (ImageButton)rootView.findViewById(R.id.changeProfPicButton);
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
+        query.getFirstInBackground(new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser parseUser, ParseException e) {
+                ParseFile fileObject = (ParseFile)parseUser.get("photo");
+                fileObject.getDataInBackground(new GetDataCallback() {
+                    @Override
+                    public void done(byte[] bytes, ParseException e) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                        ((ImageButton) rootView.findViewById(R.id.changeProfPicButton)).setImageBitmap(bmp);
+                    }
+                });
+            }
+        });
+
+        mChangeProfPicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
@@ -70,7 +93,7 @@ public class ProfileFragment extends Fragment {
         //Detects request codes
         if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
-            Bitmap bitmap = null;
+            Bitmap bitmap;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -82,7 +105,7 @@ public class ProfileFragment extends Fragment {
                 file.saveInBackground();
                 ParseUser.getCurrentUser().put("photo", file);
                 ParseUser.getCurrentUser().saveInBackground();
-                ((ImageView)rootView.findViewById(R.id.profPic)).setImageBitmap(bitmap);
+                ((ImageButton)rootView.findViewById(R.id.changeProfPicButton)).setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
