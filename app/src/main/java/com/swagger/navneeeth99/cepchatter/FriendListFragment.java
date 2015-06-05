@@ -50,6 +50,7 @@ public class FriendListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_friendslist, container, false);
         final ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
+        final TextView mNoFrndTextView = (TextView)rootView.findViewById(R.id.noFriendsTV);
 
         if (ParseUser.getCurrentUser() != null) {
             ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -66,6 +67,7 @@ public class FriendListFragment extends Fragment {
                     Log.d("test", mFriendsList.toString());
                     adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
                     listView.setAdapter(adapter);
+                    listView.setEmptyView(mNoFrndTextView);
                 }
             });
         }

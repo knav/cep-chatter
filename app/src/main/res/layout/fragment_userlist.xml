@@ -11,7 +11,7 @@
         android:id="@+id/userLV" />
 
     <TextView
-        android:id="@android:id/empty"
+        android:id="@+id/userEmptyTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nonewfriends_str"/>

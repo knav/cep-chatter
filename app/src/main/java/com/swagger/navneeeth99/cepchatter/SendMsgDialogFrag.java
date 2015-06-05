@@ -30,6 +30,7 @@ import java.util.List;
 */
 public class SendMsgDialogFrag extends DialogFragment {
     private ParseUser mFriendSelected;
+    private String mMessageTitle;
     private String mMessageText;
 
     @Override
@@ -41,6 +42,7 @@ public class SendMsgDialogFrag extends DialogFragment {
 
 
         final EditText mMessageET = (EditText)mLL.findViewById(R.id.newMsgET);
+        final EditText mMessageTitleET = (EditText)mLL.findViewById(R.id.newMsgTitleET);
         final Spinner mFriendSpinner = (Spinner)mLL.findViewById(R.id.friendSpinner);
 
         //ParseQueryAdapter<ParseUser> adapter = new CustomUserAdapter(this.getActivity());
@@ -72,10 +74,11 @@ public class SendMsgDialogFrag extends DialogFragment {
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mMessageText = mMessageET.getText().toString();
+                        mMessageTitle = mMessageTitleET.getText().toString();
                         PMessage newMsg = new PMessage();
                         newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
                         newMsg.setmReceiver(mFriendSelected.getUsername());
-                        newMsg.setmTitle("Blank for now");
+                        newMsg.setmTitle(mMessageTitle);
                         newMsg.setmContent(mMessageText);
                         newMsg.saveInBackground();
                         MessagesFragment.mMessagesAdapter.notifyDataSetChanged();

@@ -18,7 +18,7 @@
         android:id="@+id/incomingLV" />
 
     <TextView
-        android:id="@android:id/empty"
+        android:id="@+id/inboxEmptyTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty_str"
@@ -39,7 +39,7 @@
         android:id="@+id/readLV" />
 
     <TextView
-        android:id="@android:id/empty"
+        android:id="@+id/readEmptyTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty_str"
@@ -50,7 +50,7 @@
         android:padding="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/yo_lostr"
+        android:text="@string/send_new_msg"
         android:textAllCaps="true"/>
 
 </LinearLayout>

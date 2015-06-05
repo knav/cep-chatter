@@ -8,7 +8,7 @@
     <Button
         android:layout_width="188dp"
         android:layout_height="wrap_content"
-        android:text="@string/generic_dummy_str"
+        android:text="@string/addfrnds_str"
         android:padding="10sp"
         android:id="@+id/friendAddBT"/>
 
@@ -17,5 +17,10 @@
         android:layout_height="match_parent"
         android:choiceMode="multipleChoice"
         android:id="@+id/friendsLV" />
+
+    <TextView
+        android:id="@+id/noFriendsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

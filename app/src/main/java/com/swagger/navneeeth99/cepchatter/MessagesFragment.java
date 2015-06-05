@@ -48,18 +48,13 @@ public class MessagesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_messages, container, false);
 
-//        ParseQueryAdapter.QueryFactory<PMessage> mQueryFactor = new ParseQueryAdapter.QueryFactory<PMessage>() {
-//            public ParseQuery<PMessage> create() {
-//                ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
-//                if (ParseUser.getCurrentUser() != null) {
-//                    query.whereEqualTo("to", ParseUser.getCurrentUser().getUsername());
-//                }
-//                return query;
-//            }
-//        };
+        TextView mReadEmpty = (TextView)rootView.findViewById(R.id.readEmptyTV);
+        ListView mReadListView = (ListView)rootView.findViewById(R.id.readLV);
+        mReadListView.setEmptyView(mReadEmpty);
 
-        //final ParseQueryAdapter<Message> adapter = new ParseQueryAdapter<>(getActivity(), Message.class);
+        TextView mInboxEmpty = (TextView)rootView.findViewById(R.id.inboxEmptyTV);
         ListView mInboxListView = (ListView)rootView.findViewById(R.id.incomingLV);
+        mInboxListView.setEmptyView(mInboxEmpty);
         mMessagesAdapter = new CustomMessageAdapter(getActivity());
         mInboxListView.setAdapter(mMessagesAdapter);
 

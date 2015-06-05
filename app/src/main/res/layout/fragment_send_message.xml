@@ -14,10 +14,19 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/newMsgTitleET"
+        android:layout_gravity="center_horizontal"
+        android:hint="@string/input_title"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="20dp"
         android:id="@+id/newMsgET"
         android:layout_gravity="center_horizontal"
-        android:hint = "@string/input_msg"/>
+        android:hint="@string/input_msg"/>
 
 
 </LinearLayout>

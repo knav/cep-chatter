@@ -44,6 +44,8 @@ public class FriendPickerDialogFrag extends DialogFragment{
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_userlist, null);
 
         ListView mAllUserListView = (ListView)mLL.findViewById(R.id.userLV);
+        TextView mNoUsersTextView = (TextView)mLL.findViewById(R.id.userEmptyTV);
+        mAllUserListView.setEmptyView(mNoUsersTextView);
         CustomFriendPickerAdapter mAdapter = new CustomFriendPickerAdapter(getActivity());
         mAllUserListView.setAdapter(mAdapter);
 
@@ -59,6 +61,7 @@ public class FriendPickerDialogFrag extends DialogFragment{
                         }
                         ParseUser.getCurrentUser().saveInBackground();
                         FriendListFragment.adapter.notifyDataSetChanged();
+                        mNewFriendsList.clear();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

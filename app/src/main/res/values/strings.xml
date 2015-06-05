@@ -18,7 +18,7 @@
     <string name="signup_str">Sign Up!</string>
     <string name="generic_dummy_str">Dummy dummy</string>
     <string name="empty_str">Nothing here!</string>
-    <string name="yo_lostr">Send Yo to yourself</string>
+    <string name="send_new_msg">Send a new message</string>
     <string name="newmsg_str">New Messages</string>
     <string name="oldmsg_str">Old Messages</string>
     <string name="input_msg">Please input your message!</string>
@@ -28,5 +28,7 @@
     <string name="reset_pass_str">Reset Password</string>
     <string name="example_email_str">ayylmao@gmail.com</string>
     <string name="enter_email_str">Enter your email address!</string>
+    <string name="input_title">Enter title of message</string>
+    <string name="addfrnds_str">Add more friends</string>
 
 </resources>
