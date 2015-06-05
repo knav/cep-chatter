@@ -18,18 +18,6 @@ import com.parse.ParseUser;
  */
 public class ReadMessageDialogFrag extends DialogFragment {
 
-    /*public static ReadMessageDialogFrag newInstance(String from, String title, String message) {
-        ReadMessageDialogFrag f = new ReadMessageDialogFrag();
-        Bundle args = new Bundle();
-        args.putString("sender", from);
-        args.putString("title", title);
-        args.putString("msg", message);
-        f.setArguments(args);
-        return f;
-    }
-
-    public ReadMessageDialogFrag(){}*/
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final LinearLayout mLL;
@@ -45,7 +33,7 @@ public class ReadMessageDialogFrag extends DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(mTitle)
+        builder.setTitle("Full Message")
                 .setView(mLL)
                 .setNegativeButton("Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
