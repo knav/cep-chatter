@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -81,8 +78,8 @@ public class SendMsgDialogFrag extends DialogFragment {
                         newMsg.setmTitle(mMessageTitle);
                         newMsg.setmContent(mMessageText);
                         newMsg.saveInBackground();
-                        MessagesFragment.mMessagesAdapter.notifyDataSetChanged();
-                        MessagesFragment.mMessagesAdapter.loadObjects();
+                        MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
+                        MessagesFragment.mUnreadMessagesAdapter.loadObjects();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
