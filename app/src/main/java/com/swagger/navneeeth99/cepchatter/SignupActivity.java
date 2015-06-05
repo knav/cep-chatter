@@ -64,6 +64,8 @@ public class SignupActivity extends ActionBarActivity {
                     ((EditText) findViewById(R.id.newEmailET)).setError("Email field cannot be empty!");
                 } else if (!((EditText) findViewById(R.id.newpasswordET)).getText().toString().equals(((EditText) findViewById(R.id.confirmpasswordET)).getText().toString())){
                     ((EditText) findViewById(R.id.confirmpasswordET)).setError("Passwords do not match!");
+                }  else if (file == null) {
+                    Toast.makeText(SignupActivity.this, "Please set a profile picture!", Toast.LENGTH_LONG).show();
                 } else {
                     ParseUser user = new ParseUser();
                     user.setUsername(((EditText) findViewById(R.id.newidnameET)).getText().toString());
