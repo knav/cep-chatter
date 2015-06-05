@@ -65,14 +65,17 @@ public class ProfileFragment extends Fragment {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
                 ParseFile fileObject = (ParseFile)parseUser.get("photo");
-                fileObject.getDataInBackground(new GetDataCallback() {
-                    @Override
-                    public void done(byte[] bytes, ParseException e) {
-                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-                        ((ImageButton) rootView.findViewById(R.id.changeProfPicButton)).setImageBitmap(bmp);
-                    }
-                });
-
+                if (fileObject == null){
+                    ((ImageButton) rootView.findViewById(R.id.changeProfPicButton)).setImageResource(R.drawable.emptydp);
+                } else {
+                    fileObject.getDataInBackground(new GetDataCallback() {
+                        @Override
+                        public void done(byte[] bytes, ParseException e) {
+                            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                            ((ImageButton) rootView.findViewById(R.id.changeProfPicButton)).setImageBitmap(bmp);
+                        }
+                    });
+                }
                 ((TextView)rootView.findViewById(R.id.profileUsernameTV)).setText(parseUser.getUsername());
             }
         });
