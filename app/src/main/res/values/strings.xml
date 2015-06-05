@@ -31,5 +31,8 @@
     <string name="input_title">Enter title of message</string>
     <string name="addfrnds_str">Add more friends</string>
     <string name="nofrnd_str">You have no friends! Add some :)</string>
+    <string name="sender_str">Sender</string>
+    <string name="ttl_str">Title</string>
+    <string name="cnt_str">Content</string>
 
 </resources>

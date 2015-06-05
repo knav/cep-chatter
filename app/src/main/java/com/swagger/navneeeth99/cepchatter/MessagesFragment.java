@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
@@ -53,10 +55,25 @@ public class MessagesFragment extends Fragment {
         mReadListView.setEmptyView(mReadEmpty);
 
         TextView mInboxEmpty = (TextView)rootView.findViewById(R.id.inboxEmptyTV);
-        ListView mInboxListView = (ListView)rootView.findViewById(R.id.incomingLV);
+        final ListView mInboxListView = (ListView)rootView.findViewById(R.id.incomingLV);
         mInboxListView.setEmptyView(mInboxEmpty);
         mMessagesAdapter = new CustomMessageAdapter(getActivity());
         mInboxListView.setAdapter(mMessagesAdapter);
+        mInboxListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getActivity(), "You have no friends to send a message to :(", Toast.LENGTH_LONG).show();
+                PMessage mSelectedMessage = (PMessage)mInboxListView.getItemAtPosition(position);
+                Log.d("test", mSelectedMessage.toString());
+                ReadMessageDialogFrag mFullMsgDialogFrag = new ReadMessageDialogFrag();
+                Bundle args = new Bundle();
+                args.putString("sender", mSelectedMessage.getmSender());
+                args.putString("title", mSelectedMessage.getmTitle());
+                args.putString("msg", mSelectedMessage.getmContent());
+                mFullMsgDialogFrag.setArguments(args);
+                mFullMsgDialogFrag.show(getActivity().getFragmentManager(), "Reset Password");
+            }
+        });
 
         Button mMessageSender = (Button)rootView.findViewById(R.id.sendMessageBT);
         mMessageSender.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +82,7 @@ public class MessagesFragment extends Fragment {
                 int mListSize = ParseUser.getCurrentUser().getList("friends").size();
                 Log.d("test", "number of friends: " + mListSize);
                 if (mListSize == 0){
-                    //Some kind of warning dialog maybe?
+                    Toast.makeText(getActivity(), "You have no friends to send a message to :(", Toast.LENGTH_LONG).show();
                 } else {
                     DialogFragment mSendMsgDialogFrag = new SendMsgDialogFrag();
                     mSendMsgDialogFrag.show(getActivity().getFragmentManager(), "sendMsg");
