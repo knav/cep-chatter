@@ -64,10 +64,10 @@ public class FriendListFragment extends Fragment {
                     for (ParseUser pUser : mTempList) {
                         mFriendsList.add(pUser);
                     }
-                    Log.d("test", mFriendsList.toString());
+                    //Log.d("test", mFriendsList.toString());
+                    listView.setEmptyView(mNoFrndTextView);
                     adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
                     listView.setAdapter(adapter);
-                    listView.setEmptyView(mNoFrndTextView);
                 }
             });
         }
