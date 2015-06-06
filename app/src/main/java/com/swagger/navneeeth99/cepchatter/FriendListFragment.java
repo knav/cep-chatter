@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -58,8 +59,11 @@ public class FriendListFragment extends Fragment {
             query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
             query.include("friends");
             query.getFirstInBackground(new GetCallback<ParseUser>() {
+                ProgressBar mLoading = (ProgressBar)rootView.findViewById(R.id.friends_progress);
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
+                    mLoading.setVisibility(View.VISIBLE);
+                    Log.d("progress", String.valueOf(mLoading.getVisibility()));
                     mFriendsList.clear();
                     List<ParseUser> mTempList = parseUser.getList("friends");
                     for (ParseUser pUser : mTempList) {
@@ -69,6 +73,8 @@ public class FriendListFragment extends Fragment {
                     listView.setEmptyView(mNoFrndTextView);
                     adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
                     listView.setAdapter(adapter);
+                    mLoading.setVisibility(View.GONE);
+                    Log.d("progress", String.valueOf(mLoading.getVisibility()));
                 }
             });
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

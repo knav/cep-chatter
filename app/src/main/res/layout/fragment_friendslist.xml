@@ -11,16 +11,29 @@
         android:text="@string/addfrnds_str"
         android:padding="10sp"
         android:id="@+id/friendAddBT"/>
-
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/friendsLV" />
-
-    <TextView
-        android:id="@+id/noFriendsTV"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nofrnd_str"/>
+        android:layout_height="wrap_content">
 
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/friendsLV" />
+
+        <ProgressBar
+            android:indeterminate="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/friends_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/noFriendsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nofrnd_str"/>
+
+    </RelativeLayout>
 </LinearLayout>
