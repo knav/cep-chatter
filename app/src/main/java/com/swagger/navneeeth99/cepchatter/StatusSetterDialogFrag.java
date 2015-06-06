@@ -29,6 +29,7 @@ public class StatusSetterDialogFrag extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ParseUser.getCurrentUser().put("status", ((EditText)mLL.findViewById(R.id.statusChangeET)).getText().toString());
+                        ParseUser.getCurrentUser().saveInBackground();
                     }
                 })
                 .setNegativeButton("Done", new DialogInterface.OnClickListener() {

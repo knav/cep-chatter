@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -68,6 +69,17 @@ public class FriendListFragment extends Fragment {
                     listView.setEmptyView(mNoFrndTextView);
                     adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
                     listView.setAdapter(adapter);
+                }
+            });
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ParseUser mChosenFriend = (ParseUser)listView.getItemAtPosition(position);
+                    QuickProfileInfoDialogFrag quickInfoDF = new QuickProfileInfoDialogFrag();
+                    Bundle args = new Bundle();
+                    args.putString("frndID", mChosenFriend.getObjectId());
+                    quickInfoDF.setArguments(args);
+                    quickInfoDF.show(getActivity().getFragmentManager(), "quick view");
                 }
             });
         }
