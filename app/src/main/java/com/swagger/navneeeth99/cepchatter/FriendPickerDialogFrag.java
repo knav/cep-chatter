@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -32,19 +33,20 @@ import java.util.List;
 public class FriendPickerDialogFrag extends DialogFragment{
 
     private static ArrayList<ParseUser> mNewFriendsList = new ArrayList<>();
+    private static RelativeLayout mLoadingOverlay;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        //if (getArguments().containsKey(HomeworkListFragment.DEL_OBJ_NAME)) {
-            //mDeleteObjName = getArguments().getString(HomeworkListFragment.DEL_OBJ_NAME);
-        //}
-
         final LinearLayout mLL;
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_userlist, null);
 
         ListView mAllUserListView = (ListView)mLL.findViewById(R.id.userLV);
         TextView mNoUsersTextView = (TextView)mLL.findViewById(R.id.userEmptyTV);
+        mLoadingOverlay = (RelativeLayout)mLL.findViewById(R.id.users_progress);
+        mLoadingOverlay.setVisibility(View.VISIBLE);
+        mAllUserListView.setVisibility(View.INVISIBLE);
+        Log.d("test", String.valueOf(mNoUsersTextView.getVisibility()));
         mAllUserListView.setEmptyView(mNoUsersTextView);
         CustomFriendPickerAdapter mAdapter = new CustomFriendPickerAdapter(getActivity());
         mAllUserListView.setAdapter(mAdapter);
@@ -97,6 +99,9 @@ public class FriendPickerDialogFrag extends DialogFragment{
             if (v == null) {
                 v = View.inflate(getContext(), R.layout.list_pickfrienduser, null);
             }
+
+            mLoadingOverlay.setVisibility(View.GONE);
+            Log.d("test", "set invisible");
 
             super.getItemView(object, v, parent);
 
