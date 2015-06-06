@@ -46,7 +46,7 @@ public class FriendPickerDialogFrag extends DialogFragment{
         mLoadingOverlay = (RelativeLayout)mLL.findViewById(R.id.users_progress);
         mLoadingOverlay.setVisibility(View.VISIBLE);
         mAllUserListView.setVisibility(View.INVISIBLE);
-        Log.d("test", String.valueOf(mNoUsersTextView.getVisibility()));
+        Log.d("test", String.valueOf(mAllUserListView.getVisibility()));
         mAllUserListView.setEmptyView(mNoUsersTextView);
         CustomFriendPickerAdapter mAdapter = new CustomFriendPickerAdapter(getActivity());
         mAllUserListView.setAdapter(mAdapter);
