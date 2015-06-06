@@ -117,6 +117,7 @@ public class MessagesFragment extends Fragment {
                 public ParseQuery<PMessage> create() {
                     ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
                     if (ParseUser.getCurrentUser() != null) {
+                        //TODO Fix the query
                         query.whereEqualTo("to", ParseUser.getCurrentUser().getUsername());
                         query.whereEqualTo("read", false);
                     }
@@ -154,6 +155,7 @@ public class MessagesFragment extends Fragment {
                 public ParseQuery<PMessage> create() {
                     ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
                     if (ParseUser.getCurrentUser() != null) {
+                        //TODO Fix the query
                         query.whereEqualTo("to", ParseUser.getCurrentUser().getUsername());
                         query.whereEqualTo("read", true);
                     }
