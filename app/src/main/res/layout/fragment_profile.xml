@@ -3,6 +3,22 @@
     android:layout_height="match_parent"
     tools:context="com.swagger.navneeeth99.cepchatter.ProfileFragment">
 
+    <RelativeLayout
+        android:id="@+id/profile_progress"
+        android:visibility="visible"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ffffffff">
+
+        <ProgressBar
+            android:indeterminate="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            style="?android:attr/progressBarStyle"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
     <ImageButton
         android:contentDescription="@string/string_content_description"

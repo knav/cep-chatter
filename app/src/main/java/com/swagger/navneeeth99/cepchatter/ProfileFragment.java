@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,9 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        final RelativeLayout mLoadingOverlay = (RelativeLayout)rootView.findViewById(R.id.profile_progress);
+        mLoadingOverlay.setVisibility(View.VISIBLE);
+
         ImageButton mChangeProfPicButton = (ImageButton)rootView.findViewById(R.id.changeProfPicButton);
         final TextView mUsernameTV = (TextView)rootView.findViewById(R.id.profileUsernameTV);
         final TextView mStatusTV = (TextView)rootView.findViewById(R.id.profileStatusTV);
@@ -86,6 +90,7 @@ public class ProfileFragment extends Fragment {
                 } else {
                     mStatusTV.setText(parseUser.get("status").toString());
                 }
+                mLoadingOverlay.setVisibility(View.GONE);
             }
         });
 
