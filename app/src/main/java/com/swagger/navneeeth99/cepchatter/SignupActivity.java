@@ -74,6 +74,7 @@ public class SignupActivity extends ActionBarActivity {
                     ArrayList mFriendsList = new ArrayList();
                     user.put("friends", mFriendsList);
                     user.put("photo",file);
+                    user.put("status", "");
 
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {

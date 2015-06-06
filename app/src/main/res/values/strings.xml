@@ -34,5 +34,7 @@
     <string name="sender_str">Sender</string>
     <string name="ttl_str">Title</string>
     <string name="cnt_str">Content</string>
+    <string name="status_str">Status</string>
+    <string name="newsts_str">New Status</string>
 
 </resources>

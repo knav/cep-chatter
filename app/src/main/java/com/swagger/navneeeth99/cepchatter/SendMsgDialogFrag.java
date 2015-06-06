@@ -77,6 +77,7 @@ public class SendMsgDialogFrag extends DialogFragment {
                         newMsg.setmReceiver(mFriendSelected.getUsername());
                         newMsg.setmTitle(mMessageTitle);
                         newMsg.setmContent(mMessageText);
+                        newMsg.setmRead(false);
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
                         MessagesFragment.mUnreadMessagesAdapter.loadObjects();

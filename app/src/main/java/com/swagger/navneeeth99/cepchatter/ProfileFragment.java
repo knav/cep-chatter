@@ -59,6 +59,8 @@ public class ProfileFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         ImageButton mChangeProfPicButton = (ImageButton)rootView.findViewById(R.id.changeProfPicButton);
+        final TextView mUsernameTV = (TextView)rootView.findViewById(R.id.profileUsernameTV);
+        final TextView mStatusTV = (TextView)rootView.findViewById(R.id.profileStatusTV);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
         query.getFirstInBackground(new GetCallback<ParseUser>() {
@@ -76,7 +78,14 @@ public class ProfileFragment extends Fragment {
                         }
                     });
                 }
-                ((TextView)rootView.findViewById(R.id.profileUsernameTV)).setText(parseUser.getUsername());
+                mUsernameTV.setText(parseUser.getUsername());
+                if (parseUser.get("status") == null){
+                    mStatusTV.setText("~ NO STATUS ~");
+                } else if (parseUser.get("status").equals("")){
+                    mStatusTV.setText("~ NO STATUS ~");
+                } else {
+                    mStatusTV.setText(parseUser.get("status").toString());
+                }
             }
         });
 
@@ -84,6 +93,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            }
+        });
+
+        mStatusTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StatusSetterDialogFrag statusDF = new StatusSetterDialogFrag();
+                statusDF.show(getActivity().getFragmentManager(), "changingStatus");
             }
         });
 
