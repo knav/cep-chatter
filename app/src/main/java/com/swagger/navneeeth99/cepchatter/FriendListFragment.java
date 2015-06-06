@@ -53,28 +53,26 @@ public class FriendListFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_friendslist, container, false);
         final ListView listView = (ListView)rootView.findViewById(R.id.friendsLV);
         final TextView mNoFrndTextView = (TextView)rootView.findViewById(R.id.noFriendsTV);
+        final ProgressBar mLoading = (ProgressBar)rootView.findViewById(R.id.friends_progress);
 
         if (ParseUser.getCurrentUser() != null) {
+            mNoFrndTextView.setVisibility(View.INVISIBLE);
+            mLoading.setVisibility(View.VISIBLE);
             ParseQuery<ParseUser> query = ParseUser.getQuery();
             query.whereEqualTo("username", ParseUser.getCurrentUser().getUsername());
             query.include("friends");
             query.getFirstInBackground(new GetCallback<ParseUser>() {
-                ProgressBar mLoading = (ProgressBar)rootView.findViewById(R.id.friends_progress);
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
-                    mLoading.setVisibility(View.VISIBLE);
-                    Log.d("progress", String.valueOf(mLoading.getVisibility()));
                     mFriendsList.clear();
                     List<ParseUser> mTempList = parseUser.getList("friends");
                     for (ParseUser pUser : mTempList) {
                         mFriendsList.add(pUser);
                     }
-                    //Log.d("test", mFriendsList.toString());
                     listView.setEmptyView(mNoFrndTextView);
                     adapter = new CustomFriendsAdapter(getActivity(), R.layout.list_customuser, mFriendsList);
                     listView.setAdapter(adapter);
                     mLoading.setVisibility(View.GONE);
-                    Log.d("progress", String.valueOf(mLoading.getVisibility()));
                 }
             });
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
