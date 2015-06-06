@@ -54,18 +54,20 @@ public class MessagesFragment extends Fragment {
         final ListView mReadListView = (ListView)rootView.findViewById(R.id.readLV);
         mReadListView.setEmptyView(mReadEmpty);
         mReadMessagesAdapter = new CustomReadMessageAdapter(getActivity());
-        mReadListView.setAdapter(mUnreadMessagesAdapter);
+        mReadListView.setAdapter(mReadMessagesAdapter);
         mReadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getActivity(), "You have no friends to send a message to :(", Toast.LENGTH_LONG).show();
                 PMessage mSelectedMessage = (PMessage)mReadListView.getItemAtPosition(position);
-                Log.d("test", mSelectedMessage.toString());
+                Log.d("test", mSelectedMessage.getObjectId());
+                Log.d("test", mSelectedMessage.get("read").toString());
                 ReadMessageDialogFrag mFullMsgDialogFrag = new ReadMessageDialogFrag();
                 Bundle args = new Bundle();
                 args.putString("sender", mSelectedMessage.getmSender());
                 args.putString("title", mSelectedMessage.getmTitle());
                 args.putString("msg", mSelectedMessage.getmContent());
+                args.putString("id", mSelectedMessage.getObjectId());
                 mFullMsgDialogFrag.setArguments(args);
                 mFullMsgDialogFrag.show(getActivity().getFragmentManager(), "Show full message");
             }
@@ -81,12 +83,14 @@ public class MessagesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getActivity(), "You have no friends to send a message to :(", Toast.LENGTH_LONG).show();
                 PMessage mSelectedMessage = (PMessage)mInboxListView.getItemAtPosition(position);
-                Log.d("test", mSelectedMessage.toString());
+                Log.d("test", mSelectedMessage.getObjectId());
+                Log.d("test", mSelectedMessage.get("read").toString());
                 ReadMessageDialogFrag mFullMsgDialogFrag = new ReadMessageDialogFrag();
                 Bundle args = new Bundle();
                 args.putString("sender", mSelectedMessage.getmSender());
                 args.putString("title", mSelectedMessage.getmTitle());
                 args.putString("msg", mSelectedMessage.getmContent());
+                args.putString("id", mSelectedMessage.getObjectId());
                 mFullMsgDialogFrag.setArguments(args);
                 mFullMsgDialogFrag.show(getActivity().getFragmentManager(), "Show full message");
             }
@@ -117,7 +121,6 @@ public class MessagesFragment extends Fragment {
                 public ParseQuery<PMessage> create() {
                     ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
                     if (ParseUser.getCurrentUser() != null) {
-                        //TODO Fix the query
                         query.whereEqualTo("to", ParseUser.getCurrentUser().getUsername());
                         query.whereEqualTo("read", false);
                     }
@@ -155,7 +158,6 @@ public class MessagesFragment extends Fragment {
                 public ParseQuery<PMessage> create() {
                     ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
                     if (ParseUser.getCurrentUser() != null) {
-                        //TODO Fix the query
                         query.whereEqualTo("to", ParseUser.getCurrentUser().getUsername());
                         query.whereEqualTo("read", true);
                     }

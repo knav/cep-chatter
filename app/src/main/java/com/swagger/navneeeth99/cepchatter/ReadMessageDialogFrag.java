@@ -29,6 +29,9 @@ public class ReadMessageDialogFrag extends DialogFragment {
         final String mFrom = getArguments().getString("sender");
         final String mTitle = getArguments().getString("title");
         final String mContent = getArguments().getString("msg");
+        final String mMessageID = getArguments().getString("id");
+
+        Log.d("Test", mMessageID);
 
         ((TextView)mLL.findViewById(R.id.fromTV)).setText(mFrom);
         ((TextView)mLL.findViewById(R.id.titleTV)).setText(mTitle);
@@ -38,19 +41,19 @@ public class ReadMessageDialogFrag extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Full Message")
                 .setView(mLL)
-                .setNegativeButton("Done", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
-                        query.whereEqualTo("from", mFrom);
-                        query.whereEqualTo("title", mTitle);
-                        query.whereEqualTo("content", mContent);
+                        query.whereEqualTo("objectId", mMessageID);
                         query.getFirstInBackground(new GetCallback<PMessage>() {
                             @Override
                             public void done(PMessage pMessage, ParseException e) {
                                 pMessage.setmRead(true);
+                                pMessage.saveInBackground();
+                                MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
+                                MessagesFragment.mReadMessagesAdapter.notifyDataSetChanged();
                             }
                         });
-                        ReadMessageDialogFrag.this.getDialog().cancel();
                     }
                 });
         // Create the AlertDialog object and return it
