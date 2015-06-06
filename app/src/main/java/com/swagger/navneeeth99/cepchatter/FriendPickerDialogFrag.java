@@ -41,14 +41,24 @@ public class FriendPickerDialogFrag extends DialogFragment{
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_userlist, null);
 
-        ListView mAllUserListView = (ListView)mLL.findViewById(R.id.userLV);
-        TextView mNoUsersTextView = (TextView)mLL.findViewById(R.id.userEmptyTV);
+        final ListView mAllUserListView = (ListView)mLL.findViewById(R.id.userLV);
+        final TextView mNoUsersTextView = (TextView)mLL.findViewById(R.id.userEmptyTV);
         mLoadingOverlay = (RelativeLayout)mLL.findViewById(R.id.users_progress);
-        mLoadingOverlay.setVisibility(View.VISIBLE);
-        mAllUserListView.setVisibility(View.INVISIBLE);
         Log.d("test", String.valueOf(mAllUserListView.getVisibility()));
         mAllUserListView.setEmptyView(mNoUsersTextView);
         CustomFriendPickerAdapter mAdapter = new CustomFriendPickerAdapter(getActivity());
+        mAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<ParseUser>() {
+            @Override
+            public void onLoading() {
+                mLoadingOverlay.setVisibility(View.VISIBLE);
+                mNoUsersTextView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onLoaded(List<ParseUser> parseUsers, Exception e) {
+                mLoadingOverlay.setVisibility(View.GONE);
+            }
+        });
         mAllUserListView.setAdapter(mAdapter);
 
         // Use the Builder class for convenient dialog construction
@@ -100,7 +110,6 @@ public class FriendPickerDialogFrag extends DialogFragment{
                 v = View.inflate(getContext(), R.layout.list_pickfrienduser, null);
             }
 
-            mLoadingOverlay.setVisibility(View.GONE);
             Log.d("test", "set invisible");
 
             super.getItemView(object, v, parent);
