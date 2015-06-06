@@ -2,7 +2,6 @@ package com.swagger.navneeeth99.cepchatter;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseUser;
 
 /**
  * Created by navneeeth99 on 17/5/15.
@@ -21,11 +20,11 @@ public class PMessage extends ParseObject{
         put("from", mSender);
     }
 
-    public String getmRead(){
-        return getString("read");
+    public Boolean getmRead(){
+        return getBoolean("read");
     }
 
-    public void setmRead(String mRead){
+    public void setmRead(Boolean mRead){
         put("read", mRead);
     }
 

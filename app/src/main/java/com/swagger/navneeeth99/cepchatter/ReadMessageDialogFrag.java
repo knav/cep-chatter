@@ -47,7 +47,7 @@ public class ReadMessageDialogFrag extends DialogFragment {
                         query.getFirstInBackground(new GetCallback<PMessage>() {
                             @Override
                             public void done(PMessage pMessage, ParseException e) {
-                                pMessage.setmRead("true");
+                                pMessage.setmRead(true);
                             }
                         });
                         ReadMessageDialogFrag.this.getDialog().cancel();

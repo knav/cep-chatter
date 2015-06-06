@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,8 @@ public class SendMsgDialogFrag extends DialogFragment {
                         newMsg.setmReceiver(mFriendSelected.getUsername());
                         newMsg.setmTitle(mMessageTitle);
                         newMsg.setmContent(mMessageText);
-                        newMsg.setmRead("false");
+                        newMsg.setmRead(false);
+                        Log.d("test", newMsg.getmRead().toString());
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
                         MessagesFragment.mUnreadMessagesAdapter.loadObjects();
