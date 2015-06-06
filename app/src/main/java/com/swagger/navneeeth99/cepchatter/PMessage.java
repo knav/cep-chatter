@@ -21,11 +21,11 @@ public class PMessage extends ParseObject{
         put("from", mSender);
     }
 
-    public boolean getmRead(){
-        return getBoolean("read");
+    public String getmRead(){
+        return getString("read");
     }
 
-    public void setmRead(boolean mRead){
+    public void setmRead(String mRead){
         put("read", mRead);
     }
 

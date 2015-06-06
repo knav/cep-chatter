@@ -66,7 +66,7 @@ public class SendMsgDialogFrag extends DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Send Message To: ")
+        builder.setTitle("Send Message")
                 .setView(mLL)
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -77,7 +77,7 @@ public class SendMsgDialogFrag extends DialogFragment {
                         newMsg.setmReceiver(mFriendSelected.getUsername());
                         newMsg.setmTitle(mMessageTitle);
                         newMsg.setmContent(mMessageText);
-                        newMsg.setmRead(false);
+                        newMsg.setmRead("false");
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
                         MessagesFragment.mUnreadMessagesAdapter.loadObjects();
