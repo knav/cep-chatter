@@ -59,7 +59,7 @@ public class MessagesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getActivity(), "You have no friends to send a message to :(", Toast.LENGTH_LONG).show();
-                PMessage mSelectedMessage = (PMessage)mReadListView.getßItemAtPosition(position);
+                PMessage mSelectedMessage = (PMessage)mReadListView.getItemAtPosition(position);
                 Log.d("test", mSelectedMessage.toString());
                 ReadMessageDialogFrag mFullMsgDialogFrag = new ReadMessageDialogFrag();
                 Bundle args = new Bundle();
