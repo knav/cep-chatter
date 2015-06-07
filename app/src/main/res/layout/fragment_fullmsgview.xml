@@ -8,20 +8,23 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/sender_str"
-        android:id="@+id/fromTV" />
+        android:id="@+id/fromTV"
+        android:padding="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/ttl_str"
-        android:id="@+id/titleTV" />
+        android:id="@+id/titleTV"
+        android:padding="20dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/cnt_str"
-        android:id="@+id/contentTV" />
+        android:id="@+id/contentTV"
+        android:padding="20dp"/>
 
 </LinearLayout>

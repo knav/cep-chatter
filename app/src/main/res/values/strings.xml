@@ -38,5 +38,7 @@
     <string name="newsts_str">New Status</string>
     <string name="login_str">Login to CEP Chat</string>
     <string name="signupbby_str">Sign up bby</string>
+    <string name="upload_image_str">Please upload an image</string>
+    <string name="send_image_str">Send an Image!</string>
 
 </resources>

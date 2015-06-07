@@ -28,6 +28,15 @@ public class PMessage extends ParseObject{
         put("read", mRead);
     }
 
+    public Boolean getmIsImage(){
+        return getBoolean("isImage");
+    }
+
+    public void setmIsImage(Boolean mIsImage){
+        put("isImage", mIsImage);
+    }
+
+
     public String getmReceiver() {
         return getString("to");
     }

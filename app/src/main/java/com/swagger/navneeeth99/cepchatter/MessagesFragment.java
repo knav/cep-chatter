@@ -170,6 +170,21 @@ public class MessagesFragment extends Fragment {
             }
         });
 
+        Button mImageSender = (Button)rootView.findViewById(R.id.sendImageBT);
+        mImageSender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int mListSize = ParseUser.getCurrentUser().getList("friends").size();
+                Log.d("test", "number of friends: " + mListSize);
+                if (mListSize == 0){
+                    Toast.makeText(getActivity(), "You have no friends to send an image to :(", Toast.LENGTH_LONG).show();
+                } else {
+                    DialogFragment mSendImageDialogFrag = new SendImageDialogFrag();
+                    mSendImageDialogFrag.show(getActivity().getFragmentManager(), "sendImage");
+                }
+            }
+        });
+
         return rootView;
     }
 
