@@ -187,7 +187,11 @@ public class SendImageDialogFrag extends DialogFragment {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+<<<<<<< Updated upstream
             } catch(RuntimeException e){
+=======
+            } catch (RuntimeException e) {
+>>>>>>> Stashed changes
                 e.printStackTrace();
             }
 
