@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +15,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -121,9 +127,20 @@ public class SendMsgDialogFrag extends DialogFragment {
             ParseUser mFriendPicked = mFriends.get(position);
 
             TextView usernameTV = (TextView)row.findViewById(R.id.usernameTV);
-            ImageView userprofile = (ImageView)row.findViewById(R.id.profilepicIV);
+            final ImageView userprofile = (ImageView)row.findViewById(R.id.profilepicIV);
             usernameTV.setText(mFriendPicked.getUsername());
-
+            ParseFile fileObject = (ParseFile)mFriendPicked.get("photo");
+            if (fileObject == null){
+                (userprofile).setImageResource(R.drawable.emptydp);
+            } else {
+                fileObject.getDataInBackground(new GetDataCallback() {
+                    @Override
+                    public void done(byte[] bytes, ParseException e) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        userprofile.setImageBitmap(bmp);
+                    }
+                });
+            }
             return row;
         }
     }
