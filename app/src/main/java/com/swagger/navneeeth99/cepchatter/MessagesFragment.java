@@ -124,6 +124,19 @@ public class MessagesFragment extends Fragment {
                 mFullMsgDialogFrag.show(getActivity().getFragmentManager(), "Show full message");
             }
         });
+        mInboxListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                PMessage mDelMessage = (PMessage)mInboxListView.getItemAtPosition(position);
+                DeleteMessageDialogFrag delMsgDF = new DeleteMessageDialogFrag();
+                Bundle args = new Bundle();
+                args.putString("msgTitle", mDelMessage.getmTitle());
+                args.putString("msgID", mDelMessage.getObjectId());
+                delMsgDF.setArguments(args);
+                delMsgDF.show(getActivity().getFragmentManager(), "Delete message");
+                return true;
+            }
+        });
 
         Button mMessageSender = (Button)rootView.findViewById(R.id.sendMessageBT);
         mMessageSender.setOnClickListener(new View.OnClickListener() {
