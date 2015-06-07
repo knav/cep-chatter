@@ -39,7 +39,6 @@ public class ReadMessageDialogFrag extends DialogFragment {
 
         ((TextView)mLL.findViewById(R.id.fromTV)).setText(mFrom);
         ((TextView)mLL.findViewById(R.id.titleTV)).setText(mTitle);
-        ((TextView)mLL.findViewById(R.id.contentTV)).setText(mContent);
 
         ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
         query.whereEqualTo("objectId", mMessageID);
@@ -51,6 +50,10 @@ public class ReadMessageDialogFrag extends DialogFragment {
                     (mLL.findViewById(R.id.contentTV)).setVisibility(View.GONE);
                     mImageView.setImageBitmap(BitmapFactory.decodeByteArray(Base64.decode(pMessage.getmContent(), Base64.DEFAULT), 0, Base64.decode(pMessage.getmContent(), Base64.DEFAULT).length));
                     mImageView.setVisibility(View.VISIBLE);
+                } else {
+                    (mLL.findViewById(R.id.contentTV)).setVisibility(View.VISIBLE);
+                    (mLL.findViewById(R.id.contentIV)).setVisibility(View.GONE);
+                    ((TextView)mLL.findViewById(R.id.contentTV)).setText(mContent);
                 }
             }
         });
