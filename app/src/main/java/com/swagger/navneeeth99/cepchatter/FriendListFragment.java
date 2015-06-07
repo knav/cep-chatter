@@ -86,6 +86,19 @@ public class FriendListFragment extends Fragment {
                     quickInfoDF.show(getActivity().getFragmentManager(), "quick view");
                 }
             });
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    ParseUser mNotFriend = (ParseUser)listView.getItemAtPosition(position);
+                    RemoveFrndDialogFrag notFrndDF = new RemoveFrndDialogFrag();
+                    Bundle args = new Bundle();
+                    args.putString("friendID", mNotFriend.getObjectId());
+                    args.putString("friendName", mNotFriend.getUsername());
+                    notFrndDF.setArguments(args);
+                    notFrndDF.show(getActivity().getFragmentManager(), "remove friend");
+                    return true;
+                }
+            });
         }
 
         Button mAddFriends = (Button)rootView.findViewById(R.id.friendAddBT);
