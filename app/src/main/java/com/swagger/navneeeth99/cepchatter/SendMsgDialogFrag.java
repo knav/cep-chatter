@@ -21,9 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class SendMsgDialogFrag extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
+        ParseUser mRedirectFriend = null;
         final LinearLayout mLL;
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_message, null);
@@ -49,7 +52,7 @@ public class SendMsgDialogFrag extends DialogFragment {
         final EditText mMessageTitleET = (EditText)mLL.findViewById(R.id.newMsgTitleET);
         final Spinner mFriendSpinner = (Spinner)mLL.findViewById(R.id.friendSpinner);
 
-        //ParseQueryAdapter<ParseUser> adapter = new CustomUserAdapter(this.getActivity());
+
         List<ParseUser> mCurrFriendsList = ParseUser.getCurrentUser().getList("friends");
         final ArrayList<ParseUser> mCurrFriendsArray = new ArrayList<>();
         for (ParseUser pUser : mCurrFriendsList){
@@ -58,7 +61,22 @@ public class SendMsgDialogFrag extends DialogFragment {
         CustomFriendsDropdownAdapter adapter = new CustomFriendsDropdownAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, mCurrFriendsArray);
         //ArrayAdapter<ParseUser> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_customuser, R.id.usernameTV, mCurrFriendsArray);
         mFriendSpinner.setAdapter(adapter);
-
+        if (getArguments() != null) {
+            if (getArguments().containsKey("certainFriendID")) {
+                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                query.whereEqualTo("objectId", getArguments().getString("certainFriendID"));
+                query.getFirstInBackground(new GetCallback<ParseUser>() {
+                    @Override
+                    public void done(ParseUser parseUser, ParseException e) {
+                        Log.d("check", parseUser.getUsername());
+                        int spinnerPostion = mCurrFriendsArray.indexOf(parseUser);
+                        Log.d("check", String.valueOf(spinnerPostion));
+                        mFriendSpinner.setSelection(spinnerPostion);
+                        spinnerPostion = 0;
+                    }
+                });
+            }
+        }
         mFriendSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

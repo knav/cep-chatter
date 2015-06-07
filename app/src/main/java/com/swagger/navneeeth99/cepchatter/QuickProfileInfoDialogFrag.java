@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -83,7 +85,11 @@ public class QuickProfileInfoDialogFrag extends DialogFragment {
                 .setPositiveButton("Message", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Send a message
+                        DialogFragment mSendMsgDialogFrag = new SendMsgDialogFrag();
+                        Bundle args = new Bundle();
+                        args.putString("certainFriendID", pickedFriend);
+                        mSendMsgDialogFrag.setArguments(args);
+                        mSendMsgDialogFrag.show(getActivity().getFragmentManager(), "sendMsg");
                     }
                 });
 
