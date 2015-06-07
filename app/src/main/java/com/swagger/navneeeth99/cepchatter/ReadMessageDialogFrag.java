@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -30,6 +32,12 @@ public class ReadMessageDialogFrag extends DialogFragment {
         final LinearLayout mLL;
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_fullmsgview, null);
+        (mLL.findViewById(R.id.fullmsg_progress)).setVisibility(View.VISIBLE);
+        (mLL.findViewById(R.id.contentTV)).setVisibility(View.GONE);
+        (mLL.findViewById(R.id.contentIV)).setVisibility(View.GONE);
+        (mLL.findViewById(R.id.fromTV)).setVisibility(View.GONE);
+        (mLL.findViewById(R.id.titleTV)).setVisibility(View.GONE);
+
         final String mFrom = getArguments().getString("sender");
         final String mTitle = getArguments().getString("title");
         final String mContent = getArguments().getString("msg");
@@ -55,6 +63,9 @@ public class ReadMessageDialogFrag extends DialogFragment {
                     (mLL.findViewById(R.id.contentIV)).setVisibility(View.GONE);
                     ((TextView)mLL.findViewById(R.id.contentTV)).setText(mContent);
                 }
+                (mLL.findViewById(R.id.fullmsg_progress)).setVisibility(View.GONE);
+                (mLL.findViewById(R.id.fromTV)).setVisibility(View.VISIBLE);
+                (mLL.findViewById(R.id.titleTV)).setVisibility(View.VISIBLE);
             }
         });
 

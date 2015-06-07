@@ -39,6 +39,11 @@ public class QuickProfileInfoDialogFrag extends DialogFragment {
         final ImageView mProfPicIV = (ImageView)mLL.findViewById(R.id.profPicIV);
         final TextView mUsernameTV = (TextView)mLL.findViewById(R.id.profNameTV);
         final TextView mStatusTV = (TextView)mLL.findViewById(R.id.profStatusTV);
+        final RelativeLayout mQuickProfLoadingOverlay = (RelativeLayout)mLL.findViewById(R.id.quickprof_progress);
+        mQuickProfLoadingOverlay.setVisibility(View.VISIBLE);
+        mProfPicIV.setVisibility(View.GONE);
+        mUsernameTV.setVisibility(View.GONE);
+        mStatusTV.setVisibility(View.GONE);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("objectId", pickedFriend);
         query.getFirstInBackground(new GetCallback<ParseUser>() {
@@ -64,6 +69,10 @@ public class QuickProfileInfoDialogFrag extends DialogFragment {
                 } else {
                     mStatusTV.setText(parseUser.get("status").toString());
                 }
+                mQuickProfLoadingOverlay.setVisibility(View.GONE);
+                mProfPicIV.setVisibility(View.VISIBLE);
+                mUsernameTV.setVisibility(View.VISIBLE);
+                mStatusTV.setVisibility(View.VISIBLE);
             }
         });
 
