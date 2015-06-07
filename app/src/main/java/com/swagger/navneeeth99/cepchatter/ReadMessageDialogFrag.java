@@ -4,9 +4,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,6 +40,20 @@ public class ReadMessageDialogFrag extends DialogFragment {
         ((TextView)mLL.findViewById(R.id.fromTV)).setText(mFrom);
         ((TextView)mLL.findViewById(R.id.titleTV)).setText(mTitle);
         ((TextView)mLL.findViewById(R.id.contentTV)).setText(mContent);
+
+        ParseQuery<PMessage> query = new ParseQuery<>("PMessage");
+        query.whereEqualTo("objectId", mMessageID);
+        query.getFirstInBackground(new GetCallback<PMessage>() {
+            @Override
+            public void done(PMessage pMessage, ParseException e) {
+                if (pMessage.getmIsImage()){
+                    ImageView mImageView = (ImageView)mLL.findViewById(R.id.contentIV);
+                    (mLL.findViewById(R.id.contentTV)).setVisibility(View.GONE);
+                    mImageView.setImageBitmap(BitmapFactory.decodeByteArray(Base64.decode(pMessage.getmContent(), Base64.DEFAULT), 0, Base64.decode(pMessage.getmContent(), Base64.DEFAULT).length));
+                    mImageView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

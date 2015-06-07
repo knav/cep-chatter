@@ -219,7 +219,11 @@ public class MessagesFragment extends Fragment {
 
             // Add a brief of the content
             TextView contentTextView = (TextView)v.findViewById(R.id.msgContentBriefTV);
-            contentTextView.setText(object.getString("content"));
+            if (object.getmIsImage()){
+                contentTextView.setText("Image");
+            } else {
+                contentTextView.setText(object.getString("content"));
+            }
             return v;
         }
 
@@ -255,7 +259,11 @@ public class MessagesFragment extends Fragment {
 
             // Add a brief of the content
             TextView contentTextView = (TextView)v.findViewById(R.id.msgContentBriefTV);
-            contentTextView.setText(object.getString("content"));
+            if (object.getmIsImage()){
+                contentTextView.setText("Image");
+            } else {
+                contentTextView.setText(object.getString("content"));
+            }
             return v;
         }
 

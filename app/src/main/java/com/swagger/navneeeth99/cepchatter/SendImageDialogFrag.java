@@ -45,13 +45,13 @@ public class SendImageDialogFrag extends DialogFragment {
     private ParseUser mFriendSelected;
     private String mMessageTitle;
     private String mImageString;
-    public View row;
     public byte[] image;
+    public LinearLayout mLL = null;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        final LinearLayout mLL;
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_image, null);
 
@@ -103,6 +103,7 @@ public class SendImageDialogFrag extends DialogFragment {
                         newMsg.setmTitle(mMessageTitle);
                         newMsg.setmContent(mImageString);
                         newMsg.setmRead(false);
+                        newMsg.setmIsImage(true);
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
                         MessagesFragment.mUnreadMessagesAdapter.loadObjects();
@@ -179,12 +180,14 @@ public class SendImageDialogFrag extends DialogFragment {
                 ParseFile file;
                 file = new ParseFile("new_image.jpeg", image);
                 file.saveInBackground();
-                ((ImageButton)row.findViewById(R.id.uploadImageButton)).setImageBitmap(bitmap);
+                ((ImageButton)mLL.findViewById(R.id.uploadImageButton)).setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
                 // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch(RuntimeException e){
                 e.printStackTrace();
             }
 

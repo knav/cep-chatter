@@ -25,6 +25,15 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/cnt_str"
         android:id="@+id/contentTV"
-        android:padding="20dp"/>
+        android:padding="20dp"
+        android:visibility="visible"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/contentIV"
+        android:padding="20dp"
+        android:contentDescription="@string/string_content_description"
+        android:visibility="gone"/>
 
 </LinearLayout>
