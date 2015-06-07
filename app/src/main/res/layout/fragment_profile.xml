@@ -41,6 +41,7 @@
 
     <RelativeLayout
         android:id="@+id/profile_progress"
+        android:clickable="true"
         android:visibility="visible"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

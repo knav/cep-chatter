@@ -80,6 +80,7 @@
 
     <RelativeLayout
         android:id="@+id/signup_progress"
+        android:clickable="true"
         android:visibility="gone"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

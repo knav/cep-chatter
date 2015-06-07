@@ -88,6 +88,23 @@ public class MessagesFragment extends Fragment {
                 mFullMsgDialogFrag.show(getActivity().getFragmentManager(), "Show full message");
             }
         });
+        mReadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getActivity(), "You have no friends to send a message to :(", Toast.LENGTH_LONG).show();
+                PMessage mSelectedMessage = (PMessage)mReadListView.getItemAtPosition(position);
+                Log.d("test", mSelectedMessage.getObjectId());
+                Log.d("test", mSelectedMessage.get("read").toString());
+                ReadMessageDialogFrag mFullMsgDialogFrag = new ReadMessageDialogFrag();
+                Bundle args = new Bundle();
+                args.putString("sender", mSelectedMessage.getmSender());
+                args.putString("title", mSelectedMessage.getmTitle());
+                args.putString("msg", mSelectedMessage.getmContent());
+                args.putString("id", mSelectedMessage.getObjectId());
+                mFullMsgDialogFrag.setArguments(args);
+                mFullMsgDialogFrag.show(getActivity().getFragmentManager(), "Show full message");
+            }
+        });
 
         final ProgressBar mLoadingInbox = (ProgressBar)rootView.findViewById(R.id.inbox_progress);
         final TextView mInboxEmpty = (TextView)rootView.findViewById(R.id.inboxEmptyTV);
