@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +31,16 @@ public class LoginActivity extends ActionBarActivity {
         setContentView(R.layout.activity_login);
 
         Button mLoginButton = (Button)findViewById(R.id.loginBT);
-        ParseUser mCurrentUser = ParseUser.getCurrentUser() ;
+        ParseUser mCurrentUser = ParseUser.getCurrentUser();
         if (mCurrentUser != null){
             ParseUser.logOut();
         }
 
+        final RelativeLayout mLoginLoadingOverlay = (RelativeLayout)findViewById(R.id.login_progress);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mLoginLoadingOverlay.setVisibility(View.VISIBLE);
                 String usrName = ((EditText)findViewById(R.id.idnameET)).getText().toString();
                 String password = ((EditText)findViewById(R.id.passwordET)).getText().toString();
 
@@ -46,10 +50,11 @@ public class LoginActivity extends ActionBarActivity {
                             // Hooray! The user is logged in.
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
+                            mLoginLoadingOverlay.setVisibility(View.GONE);
                         } else {
                             // Signup failed. Look at the ParseException to see what happened.
-                            Toast.makeText(LoginActivity.this, "Eh it failed lmaoo (login)", Toast.LENGTH_LONG).show();
-                            Log.d("Login", e.toString());
+                            Toast.makeText(LoginActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                            mLoginLoadingOverlay.setVisibility(View.GONE);
                         }
                     }
                 });

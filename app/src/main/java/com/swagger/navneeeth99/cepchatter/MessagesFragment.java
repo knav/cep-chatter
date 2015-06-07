@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
+
+import java.util.List;
 
 /**
 * Created by navneeeth99 on 17/5/15.
@@ -50,10 +53,23 @@ public class MessagesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_messages, container, false);
 
-        TextView mReadEmpty = (TextView)rootView.findViewById(R.id.readEmptyTV);
+        final ProgressBar mLoadingReadbox = (ProgressBar)rootView.findViewById(R.id.readbox_progress);
+        final TextView mReadEmpty = (TextView)rootView.findViewById(R.id.readEmptyTV);
         final ListView mReadListView = (ListView)rootView.findViewById(R.id.readLV);
         mReadListView.setEmptyView(mReadEmpty);
         mReadMessagesAdapter = new CustomReadMessageAdapter(getActivity());
+        mReadMessagesAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<PMessage>() {
+            @Override
+            public void onLoading() {
+                mLoadingReadbox.setVisibility(View.VISIBLE);
+                mReadEmpty.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onLoaded(List<PMessage> pMessages, Exception e) {
+                mLoadingReadbox.setVisibility(View.GONE);
+            }
+        });
         mReadListView.setAdapter(mReadMessagesAdapter);
         mReadListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,10 +89,23 @@ public class MessagesFragment extends Fragment {
             }
         });
 
-        TextView mInboxEmpty = (TextView)rootView.findViewById(R.id.inboxEmptyTV);
+        final ProgressBar mLoadingInbox = (ProgressBar)rootView.findViewById(R.id.inbox_progress);
+        final TextView mInboxEmpty = (TextView)rootView.findViewById(R.id.inboxEmptyTV);
         final ListView mInboxListView = (ListView)rootView.findViewById(R.id.incomingLV);
         mInboxListView.setEmptyView(mInboxEmpty);
         mUnreadMessagesAdapter = new CustomUnreadMessageAdapter(getActivity());
+        mUnreadMessagesAdapter.addOnQueryLoadListener(new ParseQueryAdapter.OnQueryLoadListener<PMessage>() {
+            @Override
+            public void onLoading() {
+                mLoadingInbox.setVisibility(View.VISIBLE);
+                mInboxEmpty.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onLoaded(List<PMessage> pMessages, Exception e) {
+                mLoadingInbox.setVisibility(View.GONE);
+            }
+        });
         mInboxListView.setAdapter(mUnreadMessagesAdapter);
         mInboxListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

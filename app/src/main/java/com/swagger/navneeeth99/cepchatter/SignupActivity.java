@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -52,6 +53,8 @@ public class SignupActivity extends ActionBarActivity {
             }
         });
 
+        final RelativeLayout mSignupLoadingOverlay = (RelativeLayout)findViewById(R.id.signup_progress);
+
         Button mSignUpButton = (Button)findViewById(R.id.signupBT);
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +70,7 @@ public class SignupActivity extends ActionBarActivity {
                 }  else if (file == null) {
                     Toast.makeText(SignupActivity.this, "Please set a profile picture!", Toast.LENGTH_LONG).show();
                 } else {
+                    mSignupLoadingOverlay.setVisibility(View.VISIBLE);
                     ParseUser user = new ParseUser();
                     user.setUsername(((EditText) findViewById(R.id.newidnameET)).getText().toString());
                     user.setPassword(((EditText) findViewById(R.id.newpasswordET)).getText().toString());
@@ -80,12 +84,14 @@ public class SignupActivity extends ActionBarActivity {
                         public void done(ParseException e) {
                             if (e == null) {
                                 // Hooray! Let them use the app now.
+                                mSignupLoadingOverlay.setVisibility(View.GONE);
                                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                 Toast.makeText(SignupActivity.this, "Successfully signed up!", Toast.LENGTH_LONG).show();
                                 startActivity(intent);
                             } else {
                                 // Sign up didn't succeed. Look at the ParseException
                                 // to figure out what went wrong
+                                mSignupLoadingOverlay.setVisibility(View.GONE);
                                 Toast.makeText(SignupActivity.this, "Error: "+ e.toString(), Toast.LENGTH_LONG).show();
 
                             }
