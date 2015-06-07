@@ -2,6 +2,8 @@ package com.swagger.navneeeth99.cepchatter;
 
 import android.app.DialogFragment;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,13 +13,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -132,6 +137,22 @@ public class FriendListFragment extends Fragment {
             // Add the title view
             TextView titleTextView = (TextView)row.findViewById(R.id.usernameTV);
             titleTextView.setText(mListFriends.get(position).getUsername());
+            final ImageView userprofile = (ImageView)row.findViewById(R.id.profilepicIV);
+            ParseUser mFriendPicked = mListFriends.get(position);
+
+
+            ParseFile fileObject = (ParseFile)mFriendPicked.get("photo");
+            if (fileObject == null){
+                (userprofile).setImageResource(R.drawable.emptydp);
+            } else {
+                fileObject.getDataInBackground(new GetDataCallback() {
+                    @Override
+                    public void done(byte[] bytes, ParseException e) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        userprofile.setImageBitmap(bmp);
+                    }
+                });
+            }
             return row;
 
         }
