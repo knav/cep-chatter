@@ -40,5 +40,6 @@
     <string name="signupbby_str">Sign up bby</string>
     <string name="upload_image_str">Please upload an image</string>
     <string name="send_image_str">Send an Image!</string>
+    <string name="profile_text_str">Tap on your status/profile picture to edit it!</string>
 
 </resources>

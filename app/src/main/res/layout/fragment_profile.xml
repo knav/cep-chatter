@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.swagger.navneeeth99.cepchatter.ProfileFragment">
+    tools:context="com.swagger.navneeeth99.cepchatter.ProfileFragment"
+    android:background="@drawable/wallpaper">
 
     <ImageButton
         android:contentDescription="@string/string_content_description"
@@ -25,7 +26,8 @@
         android:layout_toRightOf="@+id/changeProfPicButton"
         android:layout_toEndOf="@+id/changeProfPicButton"
         android:layout_alignBottom="@+id/changeProfPicButton"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#ffa12110"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -37,7 +39,8 @@
         android:gravity="center"
         android:layout_below="@+id/changeProfPicButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#ffffffff"/>
 
     <RelativeLayout
         android:id="@+id/profile_progress"
@@ -53,8 +56,18 @@
             android:layout_height="50dp"
             style="?android:attr/progressBarStyle"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_centerInParent="true" />
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_text_str"
+        android:layout_centerInParent="true"
+        android:textColor="#7D7D84"/>
 
 </RelativeLayout>

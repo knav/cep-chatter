@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:background="@drawable/wallpaper">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,16 +12,22 @@
         android:textStyle="bold"
         android:text="@string/newmsg_str"
         android:textAllCaps="true"
-        android:id="@+id/incomingTitleTV" />
+        android:id="@+id/incomingTitleTV"
+        android:padding="10dp"
+        android:layout_weight="10"
+        android:textColor="#FF38B1"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="25">
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/incomingLV" />
+            android:layout_height="200dp"
+            android:id="@+id/incomingLV"
+            android:divider="#3C3176"
+            />
 
         <ProgressBar
             android:id="@+id/inbox_progress"
@@ -48,16 +56,22 @@
         android:textStyle="bold"
         android:text="@string/oldmsg_str"
         android:textAllCaps="true"
-        android:id="@+id/readTitleTV" />
+        android:id="@+id/readTitleTV"
+        android:padding="10dp"
+        android:layout_weight="10"
+        android:textColor="#920D5E"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="25">
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/readLV" />
+            android:layout_height="200dp"
+            android:id="@+id/readLV"
+            android:divider="#3C3176"
+            />
 
         <ProgressBar
             android:id="@+id/readbox_progress"
@@ -81,11 +95,13 @@
 
     <Button
         android:id="@+id/sendMessageBT"
-        android:padding="10sp"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send_new_msg"
-        android:textAllCaps="true"/>
+        android:textAllCaps="true"
+        android:layout_gravity="center"
+        android:layout_weight="20"/>
 
 
 </LinearLayout>

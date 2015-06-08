@@ -167,14 +167,14 @@ public class MessagesFragment extends Fragment {
             }
         });
 
-        //Creating a new PostIt
-        PostIt mNewPI = new PostIt();
-        mNewPI.setmPoster(ParseUser.getCurrentUser().getUsername());
-        mNewPI.setmHeader("TEST");
-        mNewPI.setmDescription("OMG it exists");
-        ArrayList<ParseUser> tempList = new ArrayList<>();
-        mNewPI.setmLikedBy(tempList);
-        mNewPI.saveInBackground();
+//        //Creating a new PostIt
+//        PostIt mNewPI = new PostIt();
+//        mNewPI.setmPoster(ParseUser.getCurrentUser().getUsername());
+//        mNewPI.setmHeader("TEST");
+//        mNewPI.setmDescription("OMG it exists");
+//        ArrayList<ParseUser> tempList = new ArrayList<>();
+//        mNewPI.setmLikedBy(tempList);
+//        mNewPI.saveInBackground();
 
 
         return rootView;
@@ -207,7 +207,6 @@ public class MessagesFragment extends Fragment {
             // Add the title view
             TextView titleTextView = (TextView)v.findViewById(R.id.msgTitleTV);
             titleTextView.setText(object.getString("title"));
-            titleTextView.setTextColor(Color.RED);
 
             // Add a brief of the content
             TextView contentTextView = (TextView)v.findViewById(R.id.msgContentBriefTV);
