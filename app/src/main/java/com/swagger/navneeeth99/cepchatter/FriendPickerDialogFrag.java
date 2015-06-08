@@ -72,7 +72,7 @@ public class FriendPickerDialogFrag extends DialogFragment{
                             ParseUser.getCurrentUser().add("friends", pNewFr);
                         }
                         ParseUser.getCurrentUser().saveInBackground();
-                        //FriendListFragment.adapter.notifyDataSetChanged();
+                        FriendListFragment.adapter.notifyDataSetChanged();
                         mNewFriendsList.clear();
                     }
                 })

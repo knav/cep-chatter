@@ -83,9 +83,7 @@ public class ReadMessageDialogFrag extends DialogFragment {
                                 pMessage.setmRead(true);
                                 pMessage.saveInBackground();
                                 MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
-                                MessagesFragment.mUnreadMessagesAdapter.loadObjects();
                                 MessagesFragment.mReadMessagesAdapter.notifyDataSetChanged();
-                                MessagesFragment.mReadMessagesAdapter.loadObjects();
                             }
                         });
                     }
