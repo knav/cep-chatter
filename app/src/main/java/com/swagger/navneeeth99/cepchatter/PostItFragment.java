@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
@@ -53,6 +54,23 @@ public class PostItFragment extends android.support.v4.app.Fragment{
         final GridView mPostBoard = (GridView)rootView.findViewById(R.id.postBoardGV);
         postAdapter = new PostsAdapter(getActivity());
         mPostBoard.setAdapter(postAdapter);
+        mPostBoard.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                PostIt mChosenPost = (PostIt)mPostBoard.getItemAtPosition(position);
+                if(mChosenPost.getmPoster().equals(ParseUser.getCurrentUser().getUsername())){
+                    DeletePostDialogFrag byePostDF = new DeletePostDialogFrag();
+                    Bundle args = new Bundle();
+                    args.putString("postTitle", mChosenPost.getmHeader());
+                    args.putString("postID", mChosenPost.getObjectId());
+                    byePostDF.setArguments(args);
+                    byePostDF.show(getActivity().getFragmentManager(), "Delete post");
+                } else {
+                    Toast.makeText(getActivity(), "You do not have permission to delete this post.", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            }
+        });
 
         return rootView;
     }
