@@ -18,7 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -53,11 +55,18 @@ public class ReadMessageDialogFrag extends DialogFragment {
         query.getFirstInBackground(new GetCallback<PMessage>() {
             @Override
             public void done(PMessage pMessage, ParseException e) {
-                if (pMessage.getmIsImage()){
-                    ImageView mImageView = (ImageView)mLL.findViewById(R.id.contentIV);
+                ParseFile photoFile = pMessage.getPhotoFile();
+                if (photoFile!=null){
+                    com.parse.ParseImageView mImageView = (com.parse.ParseImageView)mLL.findViewById(R.id.contentIV);
+                    mImageView.setParseFile(photoFile);
                     (mLL.findViewById(R.id.contentTV)).setVisibility(View.GONE);
-                    mImageView.setImageBitmap(BitmapFactory.decodeByteArray(Base64.decode(pMessage.getmContent(), Base64.DEFAULT), 0, Base64.decode(pMessage.getmContent(), Base64.DEFAULT).length));
                     mImageView.setVisibility(View.VISIBLE);
+                    mImageView.loadInBackground(new GetDataCallback() {
+                        @Override
+                        public void done(byte[] bytes, ParseException e) {
+                            //lmao
+                        }
+                    });
                 } else {
                     (mLL.findViewById(R.id.contentTV)).setVisibility(View.VISIBLE);
                     (mLL.findViewById(R.id.contentIV)).setVisibility(View.GONE);

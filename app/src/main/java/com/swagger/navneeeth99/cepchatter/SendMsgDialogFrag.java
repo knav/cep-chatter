@@ -103,7 +103,6 @@ public class SendMsgDialogFrag extends DialogFragment {
                         newMsg.setmTitle(mMessageTitle);
                         newMsg.setmContent(mMessageText);
                         newMsg.setmRead(false);
-                        newMsg.setmIsImage(false);
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
                         MessagesFragment.mUnreadMessagesAdapter.loadObjects();

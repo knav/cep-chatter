@@ -1,6 +1,7 @@
 package com.swagger.navneeeth99.cepchatter;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 /**
@@ -28,15 +29,6 @@ public class PMessage extends ParseObject{
         put("read", mRead);
     }
 
-    public Boolean getmIsImage(){
-        return getBoolean("isImage");
-    }
-
-    public void setmIsImage(Boolean mIsImage){
-        put("isImage", mIsImage);
-    }
-
-
     public String getmReceiver() {
         return getString("to");
     }
@@ -61,8 +53,18 @@ public class PMessage extends ParseObject{
         put("content", mContent);
     }
 
+    public ParseFile getPhotoFile() {
+        return getParseFile("photo");
+    }
+
+    public void setPhotoFile(ParseFile file) {
+        put("photo", file);
+    }
+
     @Override
     public String toString() {
         return getmTitle() + " - " + getmContent();
     }
+
+
 }

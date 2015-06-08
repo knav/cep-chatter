@@ -44,9 +44,10 @@ public class SendImageDialogFrag extends DialogFragment {
     public static final int GET_FROM_GALLERY = 555;
     private ParseUser mFriendSelected;
     private String mMessageTitle;
-    private String mImageString;
     public byte[] image;
     public LinearLayout mLL = null;
+    public ParseFile file;
+    private String mMessageText;
 
 
     @Override
@@ -95,15 +96,13 @@ public class SendImageDialogFrag extends DialogFragment {
                 .setView(mLL)
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mImageString= Base64.encodeToString(image,Base64.DEFAULT);
                         mMessageTitle = mMessageTitleET.getText().toString();
                         PMessage newMsg = new PMessage();
                         newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
                         newMsg.setmReceiver(mFriendSelected.getUsername());
                         newMsg.setmTitle(mMessageTitle);
-                        newMsg.setmContent(mImageString);
+                        newMsg.setPhotoFile(file);
                         newMsg.setmRead(false);
-                        newMsg.setmIsImage(true);
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
                         MessagesFragment.mUnreadMessagesAdapter.loadObjects();
@@ -177,7 +176,6 @@ public class SendImageDialogFrag extends DialogFragment {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 image = stream.toByteArray();
-                ParseFile file;
                 file = new ParseFile("new_image.jpeg", image);
                 file.saveInBackground();
                 ((ImageButton)mLL.findViewById(R.id.uploadImageButton)).setImageBitmap(bitmap);
