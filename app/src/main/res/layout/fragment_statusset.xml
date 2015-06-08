@@ -9,7 +9,6 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/statusChangeET"
-        android:hint="@string/newsts_str"
-        android:padding="10dp"/>
+        android:hint="@string/newsts_str"/>
 
 </LinearLayout>

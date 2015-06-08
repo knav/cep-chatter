@@ -25,8 +25,7 @@
         android:layout_toRightOf="@+id/changeProfPicButton"
         android:layout_toEndOf="@+id/changeProfPicButton"
         android:layout_alignBottom="@+id/changeProfPicButton"
-        android:gravity="center"
-        android:textColor="#ffff082a"/>
+        android:gravity="center"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -38,15 +37,15 @@
         android:gravity="center"
         android:layout_below="@+id/changeProfPicButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#ffffffff"/>
+        android:layout_alignParentStart="true" />
 
     <RelativeLayout
         android:id="@+id/profile_progress"
         android:clickable="true"
         android:visibility="visible"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="#ffffffff">
 
         <ProgressBar
             android:indeterminate="true"
@@ -54,18 +53,8 @@
             android:layout_height="50dp"
             style="?android:attr/progressBarStyle"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/profile_text_str"
-        android:layout_centerInParent="true"
-        android:textColor="#7D7D84"/>
 
 </RelativeLayout>

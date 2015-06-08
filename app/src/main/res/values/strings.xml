@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CEPNET</string>
+    <string name="app_name">CEP Chat</string>
     <string name="title_section1">List of Friends</string>
     <string name="title_section2">Messages</string>
     <string name="title_section3">Profile</string>
-    <string name="title_section4">Post-Its</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -41,9 +40,5 @@
     <string name="signupbby_str">Sign up bby</string>
     <string name="upload_image_str">Please upload an image</string>
     <string name="send_image_str">Send an Image!</string>
-    <string name="profile_text_str">Tap on your status/profile picture to edit it!</string>
-    <string name="newpostit_str">New Post-It</string>
-    <string name="description_str">Give a short description</string>
-    <string name="header_hint_str">Enter a title for your post</string>
 
 </resources>

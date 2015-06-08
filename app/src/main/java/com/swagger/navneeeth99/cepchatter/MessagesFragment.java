@@ -20,7 +20,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -167,8 +166,20 @@ public class MessagesFragment extends Fragment {
             }
         });
 
-
-
+        Button mImageSender = (Button)rootView.findViewById(R.id.sendImageBT);
+        mImageSender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int mListSize = ParseUser.getCurrentUser().getList("friends").size();
+                Log.d("test", "number of friends: " + mListSize);
+                if (mListSize == 0){
+                    Toast.makeText(getActivity(), "You have no friends to send an image to :(", Toast.LENGTH_LONG).show();
+                } else {
+                    DialogFragment mSendImageDialogFrag = new SendImageDialogFrag();
+                    mSendImageDialogFrag.show(getActivity().getFragmentManager(), "sendImage");
+                }
+            }
+        });
 
         return rootView;
     }
@@ -200,6 +211,7 @@ public class MessagesFragment extends Fragment {
             // Add the title view
             TextView titleTextView = (TextView)v.findViewById(R.id.msgTitleTV);
             titleTextView.setText(object.getString("title"));
+            titleTextView.setTextColor(Color.RED);
 
             // Add a brief of the content
             TextView contentTextView = (TextView)v.findViewById(R.id.msgContentBriefTV);

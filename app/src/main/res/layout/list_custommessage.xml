@@ -15,9 +15,7 @@
         android:id="@+id/msgTitleTV"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/holo_blue_bright"
-        />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +27,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:maxLines="1"
-        android:ellipsize="end"
-        android:textColor="#27586B"/>
+        android:ellipsize="end"/>
 
 </RelativeLayout>

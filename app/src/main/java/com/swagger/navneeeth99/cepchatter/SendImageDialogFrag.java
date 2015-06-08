@@ -12,12 +12,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,12 +26,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.io.ByteArrayOutputStream;
@@ -40,30 +38,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* Created by Benjamin on 19/5/15.
-*/
-public class SendMsgDialogFrag extends DialogFragment {
+ * Created by Benjamin on 7/6/15.
+ */
+public class SendImageDialogFrag extends DialogFragment {
+    public static final int GET_FROM_GALLERY = 555;
     private ParseUser mFriendSelected;
     private String mMessageTitle;
-    private String mMessageText;
-
-    public static final int GET_FROM_GALLERY = 555;
     public byte[] image;
     public LinearLayout mLL = null;
     public ParseFile file;
+    private String mMessageText;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final LinearLayout mLL;
+
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
-        mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_message, null);
+        mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_image, null);
+
 
         final ImageButton mUploadImageButton = (ImageButton)mLL.findViewById(R.id.uploadImageButton);
-        final EditText mMessageET = (EditText)mLL.findViewById(R.id.newMsgET);
         final EditText mMessageTitleET = (EditText)mLL.findViewById(R.id.newMsgTitleET);
         final Spinner mFriendSpinner = (Spinner)mLL.findViewById(R.id.friendSpinner);
 
-
+        //ParseQueryAdapter<ParseUser> adapter = new CustomUserAdapter(this.getActivity());
         List<ParseUser> mCurrFriendsList = ParseUser.getCurrentUser().getList("friends");
         final ArrayList<ParseUser> mCurrFriendsArray = new ArrayList<>();
         for (ParseUser pUser : mCurrFriendsList){
@@ -72,22 +70,7 @@ public class SendMsgDialogFrag extends DialogFragment {
         CustomFriendsDropdownAdapter adapter = new CustomFriendsDropdownAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, mCurrFriendsArray);
         //ArrayAdapter<ParseUser> adapter = new ArrayAdapter<>(getActivity(), R.layout.list_customuser, R.id.usernameTV, mCurrFriendsArray);
         mFriendSpinner.setAdapter(adapter);
-        if (getArguments() != null) {
-            if (getArguments().containsKey("certainFriendID")) {
-                ParseQuery<ParseUser> query = ParseUser.getQuery();
-                query.whereEqualTo("objectId", getArguments().getString("certainFriendID"));
-                query.getFirstInBackground(new GetCallback<ParseUser>() {
-                    @Override
-                    public void done(ParseUser parseUser, ParseException e) {
-                        Log.d("check", parseUser.getUsername());
-                        int spinnerPostion = mCurrFriendsArray.indexOf(parseUser);
-                        Log.d("check", String.valueOf(spinnerPostion));
-                        mFriendSpinner.setSelection(spinnerPostion);
-                        spinnerPostion = 0;
-                    }
-                });
-            }
-        }
+
         mFriendSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -100,7 +83,6 @@ public class SendMsgDialogFrag extends DialogFragment {
             }
         });
 
-
         mUploadImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,22 +92,16 @@ public class SendMsgDialogFrag extends DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Send Message")
+        builder.setTitle("Send Image")
                 .setView(mLL)
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mMessageText = mMessageET.getText().toString();
                         mMessageTitle = mMessageTitleET.getText().toString();
                         PMessage newMsg = new PMessage();
                         newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
                         newMsg.setmReceiver(mFriendSelected.getUsername());
                         newMsg.setmTitle(mMessageTitle);
-                        if (!mMessageText.equals(null)) {
-                            newMsg.setmContent(mMessageText);
-                        }
-                        if (file != null) {
-                            newMsg.setPhotoFile(file);
-                        }
+                        newMsg.setPhotoFile(file);
                         newMsg.setmRead(false);
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
@@ -134,14 +110,14 @@ public class SendMsgDialogFrag extends DialogFragment {
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        SendMsgDialogFrag.this.getDialog().cancel();
+                        SendImageDialogFrag.this.getDialog().cancel();
                     }
                 });
         // Create the AlertDialog object and return it
         return builder.create();
     }
 
-    public class CustomFriendsDropdownAdapter extends ArrayAdapter<String>{
+    public class CustomFriendsDropdownAdapter extends ArrayAdapter<String> {
 
         private ArrayList<ParseUser> mFriends;
         LayoutInflater inflater;
@@ -215,6 +191,4 @@ public class SendMsgDialogFrag extends DialogFragment {
 
         }
     }
-
 }
-

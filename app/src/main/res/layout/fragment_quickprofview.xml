@@ -27,8 +27,7 @@
         android:layout_toRightOf="@+id/profPicIV"
         android:layout_toEndOf="@+id/profPicIV"
         android:layout_alignBottom="@+id/profPicIV"
-        android:gravity="center"
-        android:textColor="#ffa12110"/>
+        android:gravity="center"/>
 
     <TextView
         android:layout_width="match_parent"
