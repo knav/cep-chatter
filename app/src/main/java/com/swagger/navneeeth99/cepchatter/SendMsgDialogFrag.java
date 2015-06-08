@@ -1,13 +1,17 @@
 package com.swagger.navneeeth99.cepchatter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,9 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +47,18 @@ public class SendMsgDialogFrag extends DialogFragment {
     private String mMessageTitle;
     private String mMessageText;
 
+    public static final int GET_FROM_GALLERY = 555;
+    public byte[] image;
+    public LinearLayout mLL = null;
+    public ParseFile file;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        ParseUser mRedirectFriend = null;
         final LinearLayout mLL;
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_message, null);
 
-
+        final ImageButton mUploadImageButton = (ImageButton)mLL.findViewById(R.id.uploadImageButton);
         final EditText mMessageET = (EditText)mLL.findViewById(R.id.newMsgET);
         final EditText mMessageTitleET = (EditText)mLL.findViewById(R.id.newMsgTitleET);
         final Spinner mFriendSpinner = (Spinner)mLL.findViewById(R.id.friendSpinner);
@@ -89,6 +100,14 @@ public class SendMsgDialogFrag extends DialogFragment {
             }
         });
 
+
+        mUploadImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            }
+        });
+
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Send Message")
@@ -101,7 +120,12 @@ public class SendMsgDialogFrag extends DialogFragment {
                         newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
                         newMsg.setmReceiver(mFriendSelected.getUsername());
                         newMsg.setmTitle(mMessageTitle);
-                        newMsg.setmContent(mMessageText);
+                        if (!mMessageText.equals(null)) {
+                            newMsg.setmContent(mMessageText);
+                        }
+                        if (file != null) {
+                            newMsg.setPhotoFile(file);
+                        }
                         newMsg.setmRead(false);
                         newMsg.saveInBackground();
                         MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
@@ -160,6 +184,35 @@ public class SendMsgDialogFrag extends DialogFragment {
                 });
             }
             return row;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Detects request codes
+        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                image = stream.toByteArray();
+                file = new ParseFile("new_image.jpeg", image);
+                file.saveInBackground();
+                ((ImageButton)mLL.findViewById(R.id.uploadImageButton)).setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch(RuntimeException e){
+                e.printStackTrace();
+            }
+
         }
     }
 

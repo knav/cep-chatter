@@ -2,46 +2,46 @@
 <items version="2" >
 
     <item
-        jar="/Users/Benjamin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6957366a186e0133607edf0f3320a8d70c12fc11.jar" />
-    </item>
-    <item
-        jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-946a009de0820a15c823e53f7e7676e36493f39a.jar" />
+        <dex dex="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-19b3e58cf7a1037e99f00c00b7c1a4845524218a.jar" />
     </item>
     <item
-        jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/classes-e2bfc14e958ada7cf3ff11b37879ba23687e5a3a.jar" />
-    </item>
-    <item
-        jar="/Users/Benjamin/Documents/CEP-Chatter/app/libs/Parse-1.9.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="fe739334780fe321141e62720822c2d456061899">
-        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/Parse-1.9.2-d54231c570bcbd858aeddea4b50ebfcc0bbed545.jar" />
-    </item>
-    <item
-        jar="/Users/Benjamin/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-bbe7d7c742f7cca9513d737bd941957bfefd9238.jar" />
-    </item>
-    <item
-        jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/classes-734d0cbbc31cbb09ff0cbbd97978ef7f5373c25e.jar" />
+        <dex dex="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/pre-dexed/debug/classes-38779a04223bdfa909fb553ebe927d8b25b1e886.jar" />
+    </item>
+    <item
+        jar="/Users/navneeeth99/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-312f10998f26433628458a4d41dcafc7fdc48874.jar" />
+    </item>
+    <item
+        jar="/Users/navneeeth99/GitHub/cep-chatter/app/libs/Parse-1.9.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fe739334780fe321141e62720822c2d456061899">
+        <dex dex="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/pre-dexed/debug/Parse-1.9.2-42f2435adb061aefd11c8824d7220d3b43cd056c.jar" />
+    </item>
+    <item
+        jar="/Users/navneeeth99/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-5195f4bac940fb3b2d0702cd839767ac7adbe6ba.jar" />
+    </item>
+    <item
+        jar="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/navneeeth99/GitHub/cep-chatter/app/build/intermediates/pre-dexed/debug/classes-156926f80a1d8ce7c108b85305873798e080096d.jar" />
     </item>
 
 </items>

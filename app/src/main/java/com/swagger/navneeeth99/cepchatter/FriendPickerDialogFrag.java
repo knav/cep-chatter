@@ -30,6 +30,7 @@ import com.parse.ParseUser;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 /**
@@ -73,6 +74,7 @@ public class FriendPickerDialogFrag extends DialogFragment{
                 .setPositiveButton("Add Friends", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("frPicker", mNewFriendsList.toString());
+                        mNewFriendsList = new ArrayList<>(new LinkedHashSet<>(mNewFriendsList));
                         for (ParseUser pNewFr:mNewFriendsList){
                             ParseUser.getCurrentUser().add("friends", pNewFr);
                         }

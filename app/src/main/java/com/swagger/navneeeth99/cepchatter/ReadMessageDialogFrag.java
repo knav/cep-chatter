@@ -59,7 +59,6 @@ public class ReadMessageDialogFrag extends DialogFragment {
                 if (photoFile!=null){
                     com.parse.ParseImageView mImageView = (com.parse.ParseImageView)mLL.findViewById(R.id.contentIV);
                     mImageView.setParseFile(photoFile);
-                    (mLL.findViewById(R.id.contentTV)).setVisibility(View.GONE);
                     mImageView.setVisibility(View.VISIBLE);
                     mImageView.loadInBackground(new GetDataCallback() {
                         @Override
@@ -67,9 +66,10 @@ public class ReadMessageDialogFrag extends DialogFragment {
                             //lmao
                         }
                     });
-                } else {
+                }
+                String content = pMessage.getmContent();
+                if (!content.equals("")) {
                     (mLL.findViewById(R.id.contentTV)).setVisibility(View.VISIBLE);
-                    (mLL.findViewById(R.id.contentIV)).setVisibility(View.GONE);
                     ((TextView)mLL.findViewById(R.id.contentTV)).setText(mContent);
                 }
                 (mLL.findViewById(R.id.fullmsg_progress)).setVisibility(View.GONE);
@@ -92,7 +92,9 @@ public class ReadMessageDialogFrag extends DialogFragment {
                                 pMessage.setmRead(true);
                                 pMessage.saveInBackground();
                                 MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
+                                MessagesFragment.mUnreadMessagesAdapter.loadObjects();
                                 MessagesFragment.mReadMessagesAdapter.notifyDataSetChanged();
+                                MessagesFragment.mReadMessagesAdapter.loadObjects();
                             }
                         });
                     }
