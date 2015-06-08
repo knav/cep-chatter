@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.swagger.navneeeth99.cepchatter.ProfileFragment"
-    android:background="@drawable/wallpaper">
+    tools:context="com.swagger.navneeeth99.cepchatter.ProfileFragment">
 
     <ImageButton
         android:contentDescription="@string/string_content_description"
@@ -27,7 +26,7 @@
         android:layout_toEndOf="@+id/changeProfPicButton"
         android:layout_alignBottom="@+id/changeProfPicButton"
         android:gravity="center"
-        android:textColor="#ffa12110"/>
+        android:textColor="#ffff082a"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -47,8 +46,7 @@
         android:clickable="true"
         android:visibility="visible"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#ffffffff">
+        android:layout_height="fill_parent">
 
         <ProgressBar
             android:indeterminate="true"

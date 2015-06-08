@@ -27,6 +27,6 @@
         android:layout_toEndOf="@+id/profilepicIV"
         android:paddingLeft="10sp"
         android:paddingRight="10sp"
-        android:textColor="#ffa12110"/>
+        android:textColor="#ffff082a"/>
 
 </RelativeLayout>

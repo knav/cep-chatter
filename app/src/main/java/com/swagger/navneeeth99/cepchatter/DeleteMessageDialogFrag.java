@@ -34,6 +34,10 @@ public class DeleteMessageDialogFrag extends DialogFragment {
                             public void done(PMessage pMessage, ParseException e) {
                                 try {
                                     pMessage.delete();
+                                    MessagesFragment.mReadMessagesAdapter.notifyDataSetChanged();
+                                    MessagesFragment.mReadMessagesAdapter.loadObjects();
+                                    MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
+                                    MessagesFragment.mUnreadMessagesAdapter.loadObjects();
                                 } catch (ParseException error) {
                                     Log.d("error", error.toString());
                                 }

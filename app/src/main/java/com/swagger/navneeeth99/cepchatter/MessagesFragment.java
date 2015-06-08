@@ -167,14 +167,7 @@ public class MessagesFragment extends Fragment {
             }
         });
 
-//        //Creating a new PostIt
-//        PostIt mNewPI = new PostIt();
-//        mNewPI.setmPoster(ParseUser.getCurrentUser().getUsername());
-//        mNewPI.setmHeader("TEST");
-//        mNewPI.setmDescription("OMG it exists");
-//        ArrayList<ParseUser> tempList = new ArrayList<>();
-//        mNewPI.setmLikedBy(tempList);
-//        mNewPI.saveInBackground();
+
 
 
         return rootView;

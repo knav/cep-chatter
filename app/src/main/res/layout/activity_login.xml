@@ -72,8 +72,7 @@
         android:clickable="true"
         android:visibility="gone"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#ffffff">
+        android:layout_height="fill_parent">
 
         <ProgressBar
             android:indeterminate="true"
