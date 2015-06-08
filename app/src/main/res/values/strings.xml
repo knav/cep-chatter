@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CEP Chat</string>
+    <string name="app_name">CEPNET</string>
     <string name="title_section1">List of Friends</string>
     <string name="title_section2">Messages</string>
     <string name="title_section3">Profile</string>
