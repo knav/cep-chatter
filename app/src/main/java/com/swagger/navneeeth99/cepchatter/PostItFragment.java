@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class PostItFragment extends android.support.v4.app.Fragment{
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    public static PostsAdapter postAdapter;
 
     public static PostItFragment newInstance(int sectionNumber) {
         PostItFragment fragment = new PostItFragment();
@@ -44,19 +45,13 @@ public class PostItFragment extends android.support.v4.app.Fragment{
         mCreatePostIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creating a new PostIt
-                PostIt mNewPI = new PostIt();
-                mNewPI.setmPoster(ParseUser.getCurrentUser().getUsername());
-                mNewPI.setmHeader("TEST");
-                mNewPI.setmDescription("OMG it exists");
-                ArrayList<ParseUser> tempList = new ArrayList<>();
-                mNewPI.setmLikedBy(tempList);
-                mNewPI.saveInBackground();
+                PostPostItDialogFrag postDF = new PostPostItDialogFrag();
+                postDF.show(getActivity().getFragmentManager(), "post post it");
             }
         });
 
         final GridView mPostBoard = (GridView)rootView.findViewById(R.id.postBoardGV);
-        PostsAdapter postAdapter = new PostsAdapter(getActivity());
+        postAdapter = new PostsAdapter(getActivity());
         mPostBoard.setAdapter(postAdapter);
 
         return rootView;

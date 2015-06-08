@@ -43,5 +43,7 @@
     <string name="send_image_str">Send an Image!</string>
     <string name="profile_text_str">Tap on your status/profile picture to edit it!</string>
     <string name="newpostit_str">New Post-It</string>
+    <string name="description_str">Give a short description</string>
+    <string name="header_hint_str">Enter a title for your post</string>
 
 </resources>
