@@ -49,12 +49,11 @@ public class SendMsgDialogFrag extends DialogFragment {
 
     public static final int GET_FROM_GALLERY = 555;
     public byte[] image;
-    public LinearLayout mLL = null;
+    public LinearLayout mLL;
     public ParseFile file;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final LinearLayout mLL;
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_message, null);
 
