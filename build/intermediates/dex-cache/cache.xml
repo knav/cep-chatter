@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="/Users/Benjamin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6957366a186e0133607edf0f3320a8d70c12fc11.jar" />
-    </item>
-    <item
         jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
         <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-946a009de0820a15c823e53f7e7676e36493f39a.jar" />
+    </item>
+    <item
+        jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0f254ec13d6671680482d2218f01ecf14dfa93e6">
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/classes-81ec91632887b76c19cf63a363be354b81660524.jar" />
     </item>
     <item
         jar="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
@@ -28,6 +28,13 @@
         revision="21.1.2"
         sha1="fe739334780fe321141e62720822c2d456061899">
         <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/Parse-1.9.2-d54231c570bcbd858aeddea4b50ebfcc0bbed545.jar" />
+    </item>
+    <item
+        jar="/Users/Benjamin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/Benjamin/Documents/CEP-Chatter/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6957366a186e0133607edf0f3320a8d70c12fc11.jar" />
     </item>
     <item
         jar="/Users/Benjamin/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
