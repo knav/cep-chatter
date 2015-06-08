@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
+import com.parse.GetDataCallback;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
@@ -117,6 +122,20 @@ public class FriendPickerDialogFrag extends DialogFragment{
             // Add the title view
             final TextView titleTextView = (TextView) v.findViewById(R.id.frusernameTV);
             titleTextView.setText(object.getString("username"));
+            final ImageView userprofile = (ImageView)v.findViewById(R.id.frprofilepicIV);
+
+            ParseFile fileObject = (ParseFile)object.get("photo");
+            if (fileObject == null){
+                (userprofile).setImageResource(R.drawable.emptydp);
+            } else {
+                fileObject.getDataInBackground(new GetDataCallback() {
+                    @Override
+                    public void done(byte[] bytes, com.parse.ParseException e) {
+                        Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                        userprofile.setImageBitmap(bmp);
+                    }
+                });
+            }
 
             // Add person to arrayList when checkbox checked
             CheckBox mPickFriendCheck = (CheckBox)v.findViewById(R.id.frcheckBox);
