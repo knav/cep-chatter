@@ -49,16 +49,15 @@ public class SendMsgDialogFrag extends DialogFragment {
 
     public static final int GET_FROM_GALLERY = 555;
     public byte[] image;
-    public LinearLayout mLL = null;
+    public LinearLayout mLL;
     public ParseFile file;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final LinearLayout mLL;
         LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_message, null);
 
-        final ImageButton mUploadImageButton = (ImageButton)mLL.findViewById(R.id.uploadImageButton);
+        final ImageButton mUploadImageButton = (ImageButton)mLL.findViewById(R.id.sendNewImageButton);
         final EditText mMessageET = (EditText)mLL.findViewById(R.id.newMsgET);
         final EditText mMessageTitleET = (EditText)mLL.findViewById(R.id.newMsgTitleET);
         final Spinner mFriendSpinner = (Spinner)mLL.findViewById(R.id.friendSpinner);
@@ -80,10 +79,10 @@ public class SendMsgDialogFrag extends DialogFragment {
                     @Override
                     public void done(ParseUser parseUser, ParseException e) {
                         Log.d("check", parseUser.getUsername());
-                        int spinnerPostion = mCurrFriendsArray.indexOf(parseUser);
-                        Log.d("check", String.valueOf(spinnerPostion));
-                        mFriendSpinner.setSelection(spinnerPostion);
-                        spinnerPostion = 0;
+                        int spinnerPosition = mCurrFriendsArray.indexOf(parseUser);
+                        Log.d("check", String.valueOf(spinnerPosition));
+                        mFriendSpinner.setSelection(spinnerPosition);
+                        spinnerPosition = 0;
                     }
                 });
             }
@@ -202,7 +201,7 @@ public class SendMsgDialogFrag extends DialogFragment {
                 image = stream.toByteArray();
                 file = new ParseFile("new_image.jpeg", image);
                 file.saveInBackground();
-                ((ImageButton)mLL.findViewById(R.id.uploadImageButton)).setImageBitmap(bitmap);
+                ((ImageButton)mLL.findViewById(R.id.sendNewImageButton)).setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

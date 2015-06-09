@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CEP Chatter App.iml" filepath="$PROJECT_DIR$/CEP Chatter App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CEP-Chatter.iml" filepath="$PROJECT_DIR$/CEP-Chatter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cep-chatter.iml" filepath="$PROJECT_DIR$/cep-chatter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cep-chatter.iml" filepath="$PROJECT_DIR$/cep-chatter.iml" />
     </modules>
   </component>
 </project>
