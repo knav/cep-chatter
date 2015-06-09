@@ -68,7 +68,7 @@ public class ReadMessageDialogFrag extends DialogFragment {
                     });
                 }
                 String content = pMessage.getmContent();
-                if (!content.equals("")) {
+                if (content != null) {
                     (mLL.findViewById(R.id.contentTV)).setVisibility(View.VISIBLE);
                     ((TextView)mLL.findViewById(R.id.contentTV)).setText(mContent);
                 }

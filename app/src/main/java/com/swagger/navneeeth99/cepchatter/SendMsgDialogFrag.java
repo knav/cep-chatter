@@ -1,9 +1,11 @@
 package com.swagger.navneeeth99.cepchatter;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,12 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -36,7 +42,9 @@ import com.parse.ParseUser;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -58,10 +66,7 @@ public class SendMsgDialogFrag extends DialogFragment {
         mLL = (LinearLayout)mLayoutInflater.inflate(R.layout.fragment_send_message, null);
 
         final ImageButton mUploadImageButton = (ImageButton)mLL.findViewById(R.id.sendNewImageButton);
-        final EditText mMessageET = (EditText)mLL.findViewById(R.id.newMsgET);
-        final EditText mMessageTitleET = (EditText)mLL.findViewById(R.id.newMsgTitleET);
         final Spinner mFriendSpinner = (Spinner)mLL.findViewById(R.id.friendSpinner);
-
 
         List<ParseUser> mCurrFriendsList = ParseUser.getCurrentUser().getList("friends");
         final ArrayList<ParseUser> mCurrFriendsArray = new ArrayList<>();
@@ -113,22 +118,7 @@ public class SendMsgDialogFrag extends DialogFragment {
                 .setView(mLL)
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mMessageText = mMessageET.getText().toString();
-                        mMessageTitle = mMessageTitleET.getText().toString();
-                        PMessage newMsg = new PMessage();
-                        newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
-                        newMsg.setmReceiver(mFriendSelected.getUsername());
-                        newMsg.setmTitle(mMessageTitle);
-                        if (!mMessageText.equals(null)) {
-                            newMsg.setmContent(mMessageText);
-                        }
-                        if (file != null) {
-                            newMsg.setPhotoFile(file);
-                        }
-                        newMsg.setmRead(false);
-                        newMsg.saveInBackground();
-                        MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
-                        MessagesFragment.mUnreadMessagesAdapter.loadObjects();
+                        //Nothing, just instantiate
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -138,6 +128,55 @@ public class SendMsgDialogFrag extends DialogFragment {
                 });
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();    //super.onStart() is where dialog.show() is actually called on the underlying dialog, so we have to do it after this point
+        final AlertDialog d = (AlertDialog)getDialog();
+
+        if(d != null) {
+            Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Boolean wantToCloseDialog = false;
+
+                    final EditText mMessageET = (EditText)mLL.findViewById(R.id.newMsgET);
+                    final EditText mMessageTitleET = (EditText)mLL.findViewById(R.id.newMsgTitleET);
+                    mMessageText = mMessageET.getText().toString();
+                    mMessageTitle = mMessageTitleET.getText().toString();
+                    PMessage newMsg = new PMessage();
+                    newMsg.setmSender(ParseUser.getCurrentUser().getUsername());
+                    newMsg.setmReceiver(mFriendSelected.getUsername());
+                    if (mMessageTitle.equals("")) {
+                        mMessageTitleET.setError("Please enter a title.");
+                    } else if (file == null && mMessageText.equals("")) {
+                        Log.d("track", "mMessageText and file both null");
+                        mMessageET.setError("You cannot leave both the content and image fields blank!");
+                    } else {
+                        newMsg.setmTitle(mMessageTitle);
+                        if (!mMessageText.equals("")) {
+                            Log.d("track", "mMessageText not null");
+                            newMsg.setmContent(mMessageText);
+                        }
+                        if (file != null) {
+                            Log.d("track", "file not null");
+                            newMsg.setPhotoFile(file);
+                        }
+                        newMsg.setmRead(false);
+                        newMsg.saveInBackground();
+                        MessagesFragment.mUnreadMessagesAdapter.notifyDataSetChanged();
+                        MessagesFragment.mUnreadMessagesAdapter.loadObjects();
+                        wantToCloseDialog = true;
+                    }
+
+                    if(wantToCloseDialog){
+                        dismiss();
+                    }
+                }
+            });
+        }
     }
 
     public class CustomFriendsDropdownAdapter extends ArrayAdapter<String>{

@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:text="@string/nofrnd_str"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:textColor="#ffffff"
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>

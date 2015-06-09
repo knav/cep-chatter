@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -203,9 +204,13 @@ public class MessagesFragment extends Fragment {
 
             // Add a brief of the content
             TextView contentTextView = (TextView)v.findViewById(R.id.msgContentBriefTV);
-
-
             contentTextView.setText(object.getString("content"));
+
+            // Add image icon if image is attached
+            ImageView isImageImageView = (ImageView)v.findViewById(R.id.isImage);
+            if (object.getPhotoFile() != null){
+                isImageImageView.setVisibility(View.VISIBLE);
+            }
 
             return v;
         }
@@ -242,8 +247,13 @@ public class MessagesFragment extends Fragment {
 
             // Add a brief of the content
             TextView contentTextView = (TextView)v.findViewById(R.id.msgContentBriefTV);
-
             contentTextView.setText(object.getString("content"));
+
+            // Add image icon if image is attached
+            ImageView isImageImageView = (ImageView)v.findViewById(R.id.isImage);
+            if (object.getPhotoFile() != null){
+                isImageImageView.setVisibility(View.VISIBLE);
+            }
 
             return v;
         }
