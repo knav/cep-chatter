@@ -17,7 +17,7 @@ public class MainApplication extends Application {
         Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(PMessage.class);
         ParseObject.registerSubclass(PostIt.class);
-        Parse.initialize(this, "BaJWEoAN2k3vLhmkBWSBsJrVCdRMCKGC8Zre4UGt", "s5f56aG5af1L7IqZtP2KbkjVHzgHanKUwmZplnfI");
+        Parse.initialize(this, "L7oqq5TcpOqhx2WNUvVMUzgBkjtY4QqLgkoWijI8", "eyPKMWCnfpDM90n8y46kI1A8eIk6G71ZcQQGXr7d");
     }
 
 }

@@ -28,8 +28,8 @@ public class RemoveFrndDialogFrag extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Are you sure you wish to delete " + getArguments().getString("friendName") + "?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+        builder.setMessage("Are you sure you wish to unfriend " + getArguments().getString("friendName") + "?")
+                .setPositiveButton("Unfriend", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         ParseQuery<ParseUser> query = ParseUser.getQuery();
                         query.whereEqualTo("objectId", getArguments().getString("friendID"));
@@ -39,6 +39,7 @@ public class RemoveFrndDialogFrag extends DialogFragment {
                                 ParseUser.getCurrentUser().removeAll("friends", parseUsers);
                             }
                         });
+                        ParseUser.getCurrentUser().saveInBackground();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

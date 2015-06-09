@@ -75,9 +75,10 @@ public class FriendPickerDialogFrag extends DialogFragment{
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("frPicker", mNewFriendsList.toString());
                         mNewFriendsList = new ArrayList<>(new LinkedHashSet<>(mNewFriendsList));
-                        for (ParseUser pNewFr:mNewFriendsList){
+                        /*for (ParseUser pNewFr:mNewFriendsList){
                             ParseUser.getCurrentUser().add("friends", pNewFr);
-                        }
+                        }*/
+                        ParseUser.getCurrentUser().addAllUnique("friends", mNewFriendsList);
                         ParseUser.getCurrentUser().saveInBackground();
                         FriendListFragment.adapter.notifyDataSetChanged();
                         mNewFriendsList.clear();
