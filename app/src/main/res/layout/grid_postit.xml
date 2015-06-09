@@ -10,30 +10,31 @@
         android:id="@+id/postCreatorTV"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"/>
+        android:paddingTop="10dp"
+        android:textSize="12sp"
+        android:textColor="#00868B"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
         android:text="@string/generic_dummy_str"
         android:id="@+id/postHeadTV"
         android:layout_below="@+id/postCreatorTV"
         android:layout_centerHorizontal="true"
-        android:padding="8dp"/>
+        android:padding="10dp"
+        android:textColor="#00688B"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
         android:text="@string/generic_dummy_str"
         android:id="@+id/postDescTV"
         android:layout_below="@+id/postHeadTV"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"/>
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#009ACD"/>
 
 </RelativeLayout>
