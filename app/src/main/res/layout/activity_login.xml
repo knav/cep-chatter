@@ -18,7 +18,7 @@
         android:textColor="@android:color/white"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
@@ -31,7 +31,7 @@
         android:textColorHint="#7D7D84"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
@@ -44,35 +44,49 @@
         android:textColorHint="#7D7D84"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/logstr"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
         android:id="@+id/loginBT"
+        android:background="@drawable/button_style"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="12sp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/newSignupBT"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/loginBT"
         android:layout_centerHorizontal="true"
-        android:text="@string/signup_str" />
+        android:background="@drawable/button_style"
+        android:text="@string/signup_str"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/reset_pass_str"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_style"
         android:id="@+id/resetPasswordButton"
         android:layout_below="@+id/passwordET"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="12sp" />
 
     <RelativeLayout
         android:id="@+id/login_progress"
         android:clickable="true"
         android:visibility="gone"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="#12ffffff">
 
         <ProgressBar
             android:indeterminate="true"

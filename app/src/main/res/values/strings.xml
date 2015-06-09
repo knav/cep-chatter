@@ -15,8 +15,8 @@
     <string name="confirmpassstr">Confirm Password</string>
     <string name="emailstr">E-mail</string>
     <string name="newbuttstr">New Button</string>
-    <string name="logstr">Login!</string>
-    <string name="signup_str">Sign Up!</string>
+    <string name="logstr">Login</string>
+    <string name="signup_str">Sign Up</string>
     <string name="generic_dummy_str">Dummy dummy</string>
     <string name="empty_str">Nothing here!</string>
     <string name="send_new_msg">Send a new message</string>
