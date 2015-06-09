@@ -7,11 +7,17 @@
     >
 
     <Button
-        android:layout_width="188dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:text="@string/addfrnds_str"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        android:textColor="#ffffff"
+        android:background="@drawable/button_style"
         android:padding="10sp"
         android:id="@+id/friendAddBT"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

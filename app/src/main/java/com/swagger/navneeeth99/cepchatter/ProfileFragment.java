@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,10 +60,21 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        final ImageButton mChangeProfPicButton = (ImageButton)rootView.findViewById(R.id.changeProfPicButton);
+        mChangeProfPicButton.post(new Runnable() {
+            @Override
+            public void run() {
+                LinearLayout.LayoutParams mParams;
+                mParams = (LinearLayout.LayoutParams) mChangeProfPicButton.getLayoutParams();
+                mParams.height = mChangeProfPicButton.getWidth();
+                mChangeProfPicButton.setLayoutParams(mParams);
+                mChangeProfPicButton.postInvalidate();
+            }
+        });
+
         final RelativeLayout mLoadingOverlay = (RelativeLayout)rootView.findViewById(R.id.profile_progress);
         mLoadingOverlay.setVisibility(View.VISIBLE);
 
-        ImageButton mChangeProfPicButton = (ImageButton)rootView.findViewById(R.id.changeProfPicButton);
         final TextView mUsernameTV = (TextView)rootView.findViewById(R.id.profileUsernameTV);
         final TextView mStatusTV = (TextView)rootView.findViewById(R.id.profileStatusTV);
         ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -97,7 +109,7 @@ public class ProfileFragment extends Fragment {
         mChangeProfPicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
             }
         });
 

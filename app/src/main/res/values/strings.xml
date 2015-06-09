@@ -8,8 +8,8 @@
     <string name="title_section4">Post-Its</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_login">Log in to CEPNET</string>
+    <string name="title_activity_signup">Join CEPNET</string>
     <string name="namestr">Name</string>
     <string name="passstr">Password</string>
     <string name="confirmpassstr">Confirm Password</string>
